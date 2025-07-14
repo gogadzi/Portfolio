@@ -1,170 +1,243 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-</head>
-<body class="bg-gray-100 text-gray-800">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full top-0 z-10">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Kuta</h1>
-      <div class="space-x-4">
-        <a href="#about" class="hover:text-blue-600">About</a>
-        <a href="#projects" class="hover:text-blue-600">Projects</a>
-        <a href="#contact" class="hover:text-blue-600">Contact</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-    <div class="text-center fade-in">
-      <h2 class="text-5xl font-bold mb-4">Hi, I'm Your Name</h2>
-      <p class="text-xl mb-6">A passionate [Your Profession, e.g., Web Developer] creating impactful solutions</p>
-      <a href="#projects" class="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-200">View My Work</a>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 fade-in">About Me</h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto fade-in">
-        I'm a [Your Profession] with a passion for building user-friendly and innovative solutions. I specialize in [e.g., web development, UI/UX design, etc.], and I love tackling complex challenges to deliver high-quality results.
-      </p>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="py-20 bg-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 fade-in">My Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project Card 1 -->
-        <div class="bg-white p-6 rounded-lg shadow-md fade-in">
-          <h3 class="text-xl font-semibold mb-2">Project One</h3>
-          <p class="text-gray-600 mb-4">A brief description of your first project. Highlight the technologies used and the impact it had.</p>
-          <a href="#" class="text-blue-600 hover:underline">View Project</a>
-        </div>
-        <!-- Project Card 2 -->
-        <div class="bg-white p-6 rounded-lg shadow-md fade-in">
-          <h3 class="text-xl font-semibold mb-2">Project Two</h3>
-          <p class="text-gray-600 mb-4">A brief description of your second project. Mention key features and outcomes.</p>
-          <a href="#" class="text-blue-600 hover:underline">View Project</a>
-        </div>
-        <!--威力
-
-        <!-- Project Card 3 -->
-        <div class="bg-white p-6 rounded-lg shadow-md fade-in">
-          <h3 class="text-xl font-semibold mb-2">Project Three</h3>
-          <p class="text-gray-600 mb-4">A brief description of your third project. Showcase your skills and achievements.</p>
-          <a href="#" class="text-blue-600 hover:underline">View Project</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-8 fade-in">Get in Touch</h2>
-      <p class="text-lg text-gray-600 mb-6 fade-in">
-        Interested in collaborating? Feel free to reach out!
-      </p>
-      <div class="flex justify-center space-x-4">
-        <a href="mailto:your.email@example.com" class="text-blue-600 hover:text-blue-800">Email</a>
-        <a href="https://linkedin.com/in/yourprofile" class="text-blue-600 hover:text-blue-800">LinkedIn</a>
-        <a href="https://github.com/yourusername" class="text-blue-600 hover:text-blue-800">GitHub</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-4">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scrolling for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Fade-in animation on scroll
-    const fadeIns = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Copywriter Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
         }
-      });
-    }, { threshold: 0.1 });
+        /* Video container styling */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 20;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .modal-content {
+            background-color: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold">Goga Dzidziguri</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-blue-600">Portfolio</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    fadeIns.forEach(element => observer.observe(element));
-  </script>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8">About Me</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center">
+                I'm a passionate copywriter with over X years of experience crafting persuasive and engaging video scripts for brands across industries. My work combines creativity with strategy to deliver messages that resonate and convert. Whether it's a promotional video, explainer, or ad campaign, I specialize in turning ideas into stories that captivate audiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">My Projects</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
+                    "id": 1,
+                    "title": "Project Title 1",
+                    "shortDescription": "A promotional video script for a tech startup, designed to highlight their innovative product.",
+                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+                    "client": "Tech Startup XYZ",
+                    "date": "January 2025",
+                    "detailedDescription": "This project involved creating a dynamic video script for a tech startup launching an innovative SaaS product. The script was designed to highlight the product's unique features, engage a tech-savvy audience, and drive sign-ups. The final video was used in a successful crowdfunding campaign, raising over $500,000."
+                }'>
+                    <div class="video-container">
+                        <video muted>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Project Title 1</h3>
+                        <p class="text-gray-600">A promotional video script for a tech startup, designed to highlight their innovative product.</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
+                    "id": 2,
+                    "title": "Project Title 2",
+                    "shortDescription": "An explainer video for a non-profit, crafted to inspire action and engagement.",
+                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+                    "client": "Non-Profit ABC",
+                    "date": "March 2025",
+                    "detailedDescription": "This project was an explainer video script for a non-profit focused on environmental conservation. The script was crafted to evoke emotion, educate viewers on the cause, and inspire donations. The video was shared across social media, resulting in a 30% increase in donor engagement."
+                }'>
+                    <div class="video-container">
+                        <video muted>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Project Title 2</h3>
+                        <p class="text-gray-600">An explainer video for a non-profit, crafted to inspire action and engagement.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
+                    "id": 3,
+                    "title": "Project Title 3",
+                    "shortDescription": "A commercial script for a lifestyle brand, focusing on emotional storytelling.",
+                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+                    "client": "Lifestyle Brand DEF",
+                    "date": "June 2025",
+                    "detailedDescription": "This commercial script was created for a lifestyle brand launching a new line of sustainable products. The script focused on emotional storytelling, connecting the brand’s values to the audience’s aspirations. The video aired on national TV and boosted brand awareness by 25%."
+                }'>
+                    <div class="video-container">
+                        <video muted>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Project Title 3</h3>
+                        <p class="text-gray-600">A commercial script for a lifestyle brand, focusing on emotional storytelling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Project Details -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
+            <div class="video-container mb-6">
+                <video id="modal-video" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <p id="modal-client" class="text-gray-600 mb-2"></p>
+            <p id="modal-date" class="text-gray-600 mb-4"></p>
+            <p id="modal-description" class="text-gray-800"></p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8">Get in Touch</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">
+                Ready to bring your brand's story to life? Contact me to discuss your next project!
+            </p>
+            <div class="text-center">
+                <a href="mailto:your.email@example.com" class="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Email Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>© 2025 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Project modal functionality
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalVideo = document.getElementById('modal-video');
+        const modalClient = document.getElementById('modal-client');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModal = document.querySelector('.modal-close');
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const project = JSON.parse(card.getAttribute('data-project'));
+                modalTitle.textContent = project.title;
+                modalVideo.querySelector('source').src = project.videoUrl;
+                modalVideo.load();
+                modalClient.textContent = `Client: ${project.client}`;
+                modalDate.textContent = `Date: ${project.date}`;
+                modalDescription.textContent = project.detailedDescription;
+                modal.style.display = 'block';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.querySelector('source').src = '';
+        });
+
+        // Close modal when clicking outside content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modalVideo.pause();
+                modalVideo.querySelector('source').src = '';
+            }
+        });
+    </script>
 </body>
 </html>
