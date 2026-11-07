@@ -117,6 +117,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .case-results,.case-cover{margin:0 0 28px}
 .case-results h2,.project-gallery h2{font-size:24px;margin:0 0 18px}
 .case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card)}
+.case-video{display:block;width:min(100%,720px);height:auto;aspect-ratio:16/9;border:0;background:var(--card)}
 .project-gallery{margin:32px 0 0}
 .project-media{display:grid;gap:18px}
 .project-media img{margin-inline:auto}
@@ -360,6 +361,7 @@ const PROJECTS = [
     "brief": "Promote Elit’s summer sale on air conditioners.",
     "work": "We took the idea that everything melts in the Georgian summer and used it to announce Elit’s price drops on air conditioners.",
     "cover": "assets/projects/elit-melting-season-cover.webp",
+    "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FElitElectronics%2Fvideos%2F578379208635568%2F&show_text=0&width=560",
     "link": [
       "Watch the Elit campaign",
       "https://www.facebook.com/ElitElectronics/videos/578379208635568/"
@@ -414,7 +416,8 @@ function caseStudy(project, section) {
     <p class="case-summary">${escapeHtml(project.summary)}</p>
     <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
     ${results ? `<section class="case-results"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
-    ${project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
+    ${project.videoEmbed ? `<div class="case-cover"><iframe class="case-video" src="${escapeHtml(project.videoEmbed)}" title="${escapeHtml(project.title)} campaign video" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`
+      : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     <section class="cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
     ${gallery ? `<section class="project-gallery"><h2>Project visuals</h2><div class="project-media">${gallery}</div></section>` : ""}
