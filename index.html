@@ -51,11 +51,13 @@ main{min-height:70vh;padding:56px 0 96px}
 body.home::before{display:none}
 body.home header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;background:transparent;border-bottom:0}
 body.home main{padding:0;min-height:0}
-.landing{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2vw,24px);padding-block:96px max(56px,env(safe-area-inset-bottom,0px))}
-.landing p{margin:0}
-.landing .blurb{max-width:48ch;color:var(--mute);font-size:clamp(16px,1.5vw,20px);line-height:1.55}
-.landing .role{font-size:clamp(13px,1.1vw,16px);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.landing h1{font-size:clamp(48px,9vw,128px);font-weight:700;line-height:.95;letter-spacing:-.055em}
+body.home main .wrap{max-width:none;padding:0}
+.landing{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw max(7vh,calc(env(safe-area-inset-bottom,0px) + 24px));overflow:hidden}
+.blurb{margin-left:62%;max-width:38ch;font-size:clamp(16px,1.3vw,20px);line-height:1.55}
+.blurb p{margin:0}
+.blurb p + p{color:var(--mute)}
+.blurb .role{font-size:clamp(13px,1.1vw,16px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.landing h1{font-size:clamp(48px,9vw,160px);font-weight:700;line-height:.95;letter-spacing:-.055em;margin-top:3vh}
 .in{animation:in .5s ease both}
 @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -96,8 +98,10 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 @media (max-width:760px){
   .wrap{padding-inline:18px}
   header nav{gap:20px}
+  .blurb{margin-left:0}
   .cols{grid-template-columns:1fr;gap:12px}
   .landing h1{font-size:clamp(44px,14vw,90px)}
+  .landing{padding-inline:18px}
 }
 @media (max-width:420px){
   .bar{gap:8px}
@@ -148,9 +152,11 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 <main id="main" tabindex="-1">
   <div class="wrap" id="view">
     <section class="landing">
-      <p class="role">Marketing strategist</p>
+      <div class="blurb">
+        <p class="role">Marketing strategist</p>
+        <p>Eight years of experience in paid media, social growth, and copywriting for Georgian-speaking audiences.</p>
+      </div>
       <h1>Goga Dzidziguri</h1>
-      <p class="blurb">Eight years of experience in paid media, social growth, and copywriting for Georgian-speaking audiences.</p>
     </section>
   </div>
   <noscript><p class="wrap">Enable JavaScript to browse the work and about pages.</p></noscript>
@@ -364,7 +370,7 @@ const PROJECTS = [
 ];
 
 const aboutProjects = PROJECTS.slice(0, 3);
-const workProjects = PROJECTS.slice(3);
+const workProjects = PROJECTS.slice(3).reverse();
 
 const $ = selector => document.querySelector(selector);
 const view = $("#view");
