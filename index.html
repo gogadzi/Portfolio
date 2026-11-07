@@ -1,243 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Copywriter Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Video container styling */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-        }
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        /* Modal styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 20;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-        .modal-content {
-            background-color: white;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            position: relative;
-        }
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Goga Dzidziguri – Marketing Portfolio</title>
+<meta name="description" content="Marketing portfolio: campaigns, social, brand and content work with measurable results.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:wght@400;500&family=Montserrat:wght@300;700&family=Outfit:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--ink:#1A1A1A;--mute:#767676;--line:#E8E8E8;--acc:#1A1A1A;--onacc:#FFFFFF;--hi:#F0F0F0;--card:#FAFAFA;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--hi:#F2E85C;--card:#1C1B3A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--hi:#F2E85C;--card:#1C1B3A;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.02;margin:0;letter-spacing:-.025em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif;text-decoration:none;letter-spacing:-.03em}
+nav{display:flex;gap:28px;align-items:center}
+nav a,.dd>button{font:500 16px "DM Sans",sans-serif;text-decoration:none;background:none;border:0;color:var(--ink);cursor:pointer;padding:6px 0}
+nav a:hover,.dd>button:hover,nav a[aria-current]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.dd{position:relative}
+.menu{display:none;position:absolute;top:100%;left:-16px;min-width:210px;background:var(--card);border:1px solid var(--line);padding:8px;border-radius:6px}
+.dd:hover .menu,.dd:focus-within .menu{display:block}
+.menu a{display:block;padding:8px 10px;border-radius:4px}
+.menu a:hover{background:var(--hi);color:#17163A;text-decoration:none}
+main{min-height:70vh;padding:56px 0 96px}
+.hero h1{font-size:clamp(44px,8.4vw,112px);font-weight:800;max-width:15ch}
+.hero h1 mark{background:var(--hi);color:#17163A;padding:0 .12em}
+.hero p{max-width:52ch;color:var(--mute);margin:28px 0 56px;font-size:19px}
+.idx{border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none;position:relative}
+.row h3{font-size:clamp(24px,3.2vw,38px);font-weight:700}
+.row span{color:var(--mute)}
+.row .res{color:var(--ink);font-weight:500}
+.row:hover{background:var(--acc);color:var(--onacc);padding-left:14px;padding-right:14px}
+.row:hover span{color:inherit}
+.row{transition:padding .2s,background .2s}
+.sec{margin-top:88px}
+.sec h2,.page h1{font-size:clamp(28px,4vw,44px);font-weight:600;margin-bottom:24px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 36px}
+.filters a{border:1.5px solid var(--ink);border-radius:99px;padding:6px 16px;text-decoration:none;font-weight:500;font-size:15px}
+.filters a[aria-current]{background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.tile{text-decoration:none;display:block}
+.tile .art{aspect-ratio:4/3;border-radius:0;display:flex;align-items:flex-end;padding:18px;color:#17163A;font:800 clamp(28px,3vw,40px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;transition:transform .2s}
+.tile:hover .art{transform:translateY(-4px)}
+.tile h3{font-size:22px;margin:14px 0 2px;font-weight:700}
+.tile p{margin:0;color:var(--mute);font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--mute);margin:0 0 40px}
+.meta b{color:var(--ink);font-weight:500}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:12px 40px;padding:28px 0;border-top:1px solid var(--line)}
+.cols h2{font-size:22px;font-weight:700}
+.cols p{margin:0;max-width:62ch}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 0}
+.shots div{aspect-ratio:4/5;border:1.5px dashed var(--mute);border-radius:4px;display:grid;place-items:center;text-align:center;color:var(--mute);font-size:14px;padding:10px}
+.stats{display:flex;flex-wrap:wrap;gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 20px;min-width:150px}
+.stat b{display:block;font:800 34px "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.stat span{color:var(--mute);font-size:15px}
+.next{margin-top:56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--acc);color:var(--onacc);font:700 16px "DM Sans",sans-serif;padding:14px 26px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.about{display:grid;grid-template-columns:1fr 1.5fr;gap:56px}
+.photo{aspect-ratio:4/5;background:var(--hi);border-radius:4px;display:grid;place-items:center;color:#17163A;font-weight:500;text-align:center;padding:20px}
+.about ul{padding:0;list-style:none;margin:8px 0 28px;display:flex;flex-wrap:wrap;gap:8px}
+.about li{border:1.5px solid var(--line);border-radius:99px;padding:4px 14px;font-size:15px}
+.about p{max-width:60ch}
+label{display:block;font-weight:500;margin:0 0 6px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:12px;margin-bottom:20px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
+footer .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 32px}
+.heroimg{aspect-ratio:16/8;background:var(--hi);display:grid;place-items:center;color:var(--mute);overflow:hidden}.heroimg img{width:100%;height:100%;object-fit:cover}.tag{color:var(--mute);margin:20px 0 48px;max-width:60ch}.stack{display:grid;gap:14px;margin:0 0 40px}.stack div{aspect-ratio:16/9;background:var(--hi);display:grid;place-items:center;color:var(--mute)}#mbtn{display:none;background:none;border:0;font:500 16px "DM Sans",sans-serif;color:var(--ink);cursor:pointer}
+body.home::before{display:none}
+body.home header{position:fixed;left:0;right:0;background:transparent;border-bottom:0;color:#fff}
+body.home header a{color:#fff}
+body.home main{padding:0;min-height:0}
+body.home main .wrap{max-width:none;padding:0}
+.landing{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw 9vh;color:#FFF3A0;overflow:hidden;background:radial-gradient(ellipse 45% 30% at 62% 26%,#0E1013 0%,rgba(14,16,19,0) 100%),radial-gradient(ellipse 70% 50% at 55% 62%,rgba(86,118,155,.7) 0%,rgba(86,118,155,0) 100%),linear-gradient(180deg,#15181D 0%,#1E2A3A 45%,#46627F 100%)}
+.landing::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");opacity:.4;mix-blend-mode:overlay;pointer-events:none}
+.landing.bg-teal{background:radial-gradient(circle at 76% 36%,transparent 15vw,rgba(125,225,200,.28) 15.6vw,transparent 26vw),radial-gradient(ellipse 60% 45% at 76% 36%,rgba(6,18,17,.85) 0%,rgba(6,18,17,0) 100%),linear-gradient(180deg,#081715 0%,#12423E 55%,#2C7A70 100%)}
+.landing.bg-dusk{background:radial-gradient(ellipse 55% 38% at 70% 38%,rgba(255,128,96,.55) 0%,rgba(255,128,96,0) 100%),radial-gradient(ellipse 40% 25% at 30% 20%,rgba(120,80,200,.35) 0%,rgba(120,80,200,0) 100%),linear-gradient(180deg,#140C28 0%,#2E1650 50%,#1E0F36 100%)}
+.landing>*{position:relative;z-index:1}
+.blurb{margin-left:62%;max-width:32vw;font:300 clamp(14px,1.25vw,19px)/1.55 Montserrat,sans-serif}
+.blurb p{margin:0}
+.blurb .role{font-size:1.6em;text-transform:uppercase;margin-bottom:12px}
+.blurb strong{font-weight:700}
+.landing h1{font:500 6.3vw/1 Outfit,sans-serif;letter-spacing:-.02em;white-space:nowrap;margin-top:3vh}
+@media (max-width:760px){.blurb{margin-left:0;max-width:none}.landing h1{font-size:15vw;white-space:normal}}
+.in{animation:in .5s ease both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:760px){
+ nav{gap:20px}
+ .row{grid-template-columns:1fr;gap:2px}
+ .cols,.about,.contact{grid-template-columns:1fr;gap:16px}
+ .about{gap:32px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-<body class="bg-gray-100 font-sans text-gray-800">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold">Goga Dzidziguri</h1>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
-                    <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
-                    <a href="#portfolio" class="text-gray-600 hover:text-blue-600">Portfolio</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body>
+<header><div class="wrap bar">
+ <a class="logo" href="#home">Goga Dzidziguri</a>
+ <nav id="nav" aria-label="Main">
+  <a href="#work" data-nav="work">Work</a>
+  <a href="#about" data-nav="about">About</a>
+ </nav>
+</div></header>
+<main><div class="wrap" id="view"></div></main>
+<footer><div class="wrap"><span>© 2026 Goga Dzidziguri</span><span><a href="#contact">Contact</a> &nbsp; <a href="https://linkedin.com/in/yourname">LinkedIn</a> &nbsp; <a href="https://instagram.com/yourname">Instagram</a></span></div></footer>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">About Me</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center">
-                I'm a passionate copywriter with over X years of experience crafting persuasive and engaging video scripts for brands across industries. My work combines creativity with strategy to deliver messages that resonate and convert. Whether it's a promotional video, explainer, or ad campaign, I specialize in turning ideas into stories that captivate audiences.
-            </p>
-        </div>
-    </section>
+<script>
+// ===== EDIT THIS SECTION: your name, folders and projects =====
+const FOLDERS = {campaigns:"Campaigns", social:"Social media", brand:"Brand and creative", content:"Content and copy"};
+const PROJECTS = [
+ {id:"lumen-launch", title:"Lumen skincare launch", folder:"campaigns", client:"Lumen", year:"2025", role:"Campaign lead",
+  color:"#F2E85C", art:"+312%", summary:"Launch campaign for a new skincare line.",
+  brief:"Lumen needed to launch a serum in a crowded category with a small budget and no existing audience.",
+  strategy:"We built the campaign around real customer routines instead of product claims: 40 micro-creators, a 21-day challenge, and retargeting for people who watched more than half of any video.",
+  results:[["+312%","Instagram reach"],["4.1x","Return on ad spend"],["9,800","Pre-launch signups"]]},
+ {id:"cafe-reels", title:"Northside Café reels", folder:"social", client:"Northside Café", year:"2025", role:"Social strategist",
+  color:"#B9B6FF", art:"2K→9K", summary:"Short video series that grew a local café’s following.",
+  brief:"A neighborhood café had a good product but only 2,000 followers and empty weekday afternoons.",
+  strategy:"Weekly behind-the-bar reels, a ‘secret menu’ drop every Thursday, and local-hashtag partnerships with nearby studios.",
+  results:[["2K→9K","Followers in 4 months"],["+38%","Weekday foot traffic"],["6.2%","Average engagement"]]},
+ {id:"fieldnote-rebrand", title:"Fieldnote rebrand", folder:"brand", client:"Fieldnote", year:"2024", role:"Creative strategist",
+  color:"#FF9F7A", art:"Fieldnote", summary:"New positioning, voice and visual identity for a stationery brand.",
+  brief:"Fieldnote’s identity looked like every other notebook brand, and customers couldn’t say what made it different.",
+  strategy:"We repositioned around ‘notes for people who work outside’, then rewrote the voice guide, packaging copy and product pages.",
+  results:[["+24%","Average order value"],["-18%","Bounce rate"],["3","Retail partners won"]]},
+ {id:"newsletter-growth", title:"The Weekly Brief newsletter", folder:"content", client:"Personal project", year:"2024", role:"Writer and growth lead",
+  color:"#9BE3C4", art:"12K", summary:"A marketing newsletter grown from zero without paid ads.",
+  brief:"I wanted to test whether a niche newsletter could reach 10,000 readers organically in a year.",
+  strategy:"One useful teardown per week, a referral program with small rewards, and repurposing each issue into LinkedIn posts.",
+  results:[["12K","Subscribers in 11 months"],["52%","Open rate"],["14%","Referral share of growth"]]},
+ {id:"spring-search", title:"Spring sale search ads", folder:"campaigns", client:"Hearth Home", year:"2024", role:"Paid media manager",
+  color:"#8CC8FF", art:"-27% CPA", summary:"Search and shopping campaign restructure before a seasonal sale.",
+  brief:"Hearth Home’s ad spend was rising while conversions stayed flat in the weeks before their biggest sale.",
+  strategy:"Regrouped campaigns by purchase intent, cut low-intent keywords, and rewrote ad copy around delivery dates and returns.",
+  results:[["-27%","Cost per acquisition"],["+41%","Conversion rate"],["$86K","Sale-week revenue"]]},
+ {id:"founder-linkedin", title:"Founder LinkedIn program", folder:"social", client:"Stackwell", year:"2025", role:"Ghostwriter and strategist",
+  color:"#F2E85C", art:"0→48K", summary:"Thought-leadership posts for a startup founder.",
+  brief:"Stackwell’s founder was well-known in conversation but invisible online, and sales calls started cold.",
+  strategy:"Three weekly posts drawn from real customer questions, plus a monthly long-form story tied to a product update.",
+  results:[["0→48K","Monthly impressions"],["19","Inbound leads in 90 days"],["3","Enterprise deals sourced"]]}
+];
+const ABOUT = {
+ photo:"Add your photo here",
+ headline:"I turn marketing ideas into results you can measure.",
+ body:["I’m a marketer with experience in campaigns, social media and brand strategy. I like work that starts with a clear problem and ends with numbers we can check.","Replace this text with your own story: where you started, what you’re best at, and what kind of team or client you want to work with."],
+ skills:["Campaign strategy","Paid media","Social media","Copywriting","Email marketing","SEO","Analytics","Brand positioning"],
+ tools:["Google Analytics","Meta Ads","Google Ads","HubSpot","Figma","Canva"]
+};
+const EMAIL = "hello@yourname.com";
+const HERO = ""; // optional: paste a data: image or hosted image URL to replace the generated background
+const NAME = "Goga Dzidziguri";
+const BACKGROUND = "teal"; // choose "teal", "dusk" or "blue" (the original)
+const LANDING = {role:"Marketing strategist", a:"I’m Goga Dzidziguri. I’ve been working as a ", b:"marketer across campaigns, social media and brand strategy", c:" for several years. I’m interested in how creative ideas and data can come together to grow a brand."};
+const HEADLINE = ["I help brands grow with ", "campaigns", " that people remember."];
+const INTRO = "Marketing strategist focused on campaigns, social and brand. Selected work below, each with the result it produced.";
+// ===== END EDIT SECTION =====
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-12">My Projects</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
-                    "id": 1,
-                    "title": "Project Title 1",
-                    "shortDescription": "A promotional video script for a tech startup, designed to highlight their innovative product.",
-                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
-                    "client": "Tech Startup XYZ",
-                    "date": "January 2025",
-                    "detailedDescription": "This project involved creating a dynamic video script for a tech startup launching an innovative SaaS product. The script was designed to highlight the product's unique features, engage a tech-savvy audience, and drive sign-ups. The final video was used in a successful crowdfunding campaign, raising over $500,000."
-                }'>
-                    <div class="video-container">
-                        <video muted>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Project Title 1</h3>
-                        <p class="text-gray-600">A promotional video script for a tech startup, designed to highlight their innovative product.</p>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
-                    "id": 2,
-                    "title": "Project Title 2",
-                    "shortDescription": "An explainer video for a non-profit, crafted to inspire action and engagement.",
-                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
-                    "client": "Non-Profit ABC",
-                    "date": "March 2025",
-                    "detailedDescription": "This project was an explainer video script for a non-profit focused on environmental conservation. The script was crafted to evoke emotion, educate viewers on the cause, and inspire donations. The video was shared across social media, resulting in a 30% increase in donor engagement."
-                }'>
-                    <div class="video-container">
-                        <video muted>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Project Title 2</h3>
-                        <p class="text-gray-600">An explainer video for a non-profit, crafted to inspire action and engagement.</p>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer project-card" data-project='{
-                    "id": 3,
-                    "title": "Project Title 3",
-                    "shortDescription": "A commercial script for a lifestyle brand, focusing on emotional storytelling.",
-                    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
-                    "client": "Lifestyle Brand DEF",
-                    "date": "June 2025",
-                    "detailedDescription": "This commercial script was created for a lifestyle brand launching a new line of sustainable products. The script focused on emotional storytelling, connecting the brand’s values to the audience’s aspirations. The video aired on national TV and boosted brand awareness by 25%."
-                }'>
-                    <div class="video-container">
-                        <video muted>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Project Title 3</h3>
-                        <p class="text-gray-600">A commercial script for a lifestyle brand, focusing on emotional storytelling.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+const $ = s => document.querySelector(s), view = $("#view");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fname = id => FOLDERS[id];
 
-    <!-- Modal for Project Details -->
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
-            <div class="video-container mb-6">
-                <video id="modal-video" controls>
-                    <source src="" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <p id="modal-client" class="text-gray-600 mb-2"></p>
-            <p id="modal-date" class="text-gray-600 mb-4"></p>
-            <p id="modal-description" class="text-gray-800"></p>
-        </div>
-    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Get in Touch</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">
-                Ready to bring your brand's story to life? Contact me to discuss your next project!
-            </p>
-            <div class="text-center">
-                <a href="mailto:your.email@example.com" class="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Email Me</a>
-            </div>
-        </div>
-    </section>
+function row(p){return `<a class="row" href="#case-${p.id}"><h3>${esc(p.title)}</h3><span>${esc(fname(p.folder))}, ${esc(p.year)}</span><span class="res">${esc(p.results[0][0])} ${esc(p.results[0][1].toLowerCase())}</span></a>`}
+function tile(p){return `<a class="tile" href="#case-${p.id}"><div class="art" style="background:${p.color}">${esc(p.art)}</div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></a>`}
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>© 2025 IAKOBIIIII  All rights reserved.</p>
-        </div>
-    </footer>
+function home(){
+ return `<section class="landing in bg-${BACKGROUND}"${HERO ? ` style="background:url('${esc(HERO)}') center/cover"` : ""}><div class="blurb"><p class="role">${esc(LANDING.role)}</p><p>${esc(LANDING.a)}<strong>${esc(LANDING.b)}</strong>${esc(LANDING.c)}</p></div><h1>${esc(NAME)} Portfolio</h1></section>`;
+}
+function work(f){
+ const list = f ? PROJECTS.filter(p => p.folder === f) : PROJECTS;
+ const chips = [["","All"],...Object.entries(FOLDERS)].map(([k,v]) => `<a href="#work${k?"-"+k:""}" ${k===f||(!k&&!f)?'aria-current="page"':""}>${esc(v)}</a>`).join("");
+ return `<section class="page in"><h1>Work</h1><div class="filters">${chips}</div>
+ <div class="grid">${list.map(tile).join("") || "<p>No projects in this folder yet. Add one in the PROJECTS list.</p>"}</div></section>`;
+}
+function whole(id){
+ const i = PROJECTS.findIndex(p => p.id === id); if (i < 0) return work();
+ const p = PROJECTS[i], n = PROJECTS[(i+1)%PROJECTS.length];
+ return `<article class="page in"><p><a href="#work-${p.folder}">Back to ${esc(fname(p.folder))}</a></p>
+ <h1>${esc(p.title)}</h1>
+ <p class="meta"><span>Client <b>${esc(p.client)}</b></span><span>Year <b>${esc(p.year)}</b></span><span>My role <b>${esc(p.role)}</b></span></p>
+ <div class="stack"><div>Add an ad, post or mockup</div><div>Add an ad, post or mockup</div><div>Add an ad, post or mockup</div></div>
+ <div class="cols"><h2>The brief</h2><p>${esc(p.brief)}</p></div>
+ <div class="cols"><h2>The strategy</h2><p>${esc(p.strategy)}</p></div>
+ <div class="cols"><h2>The results</h2><div class="stats">${p.results.map(r => `<div class="stat"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div></div>
+ <div class="next"><a class="btn" href="#case-${n.id}">Next: ${esc(n.title)}</a><a href="#contact">Want results like these? Get in touch</a></div></article>`;
+}
+function about(){
+ return `<section class="page in"><h1>About</h1><div class="about"><div class="photo">${esc(ABOUT.photo)}</div><div>
+ <h2 style="font-size:clamp(26px,3.4vw,40px);margin-bottom:20px">${esc(ABOUT.headline)}</h2>
+ ${ABOUT.body.map(t => `<p>${esc(t)}</p>`).join("")}
+ <h3 style="font-size:20px;margin-top:28px">Skills</h3><ul>${ABOUT.skills.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+ <h3 style="font-size:20px">Tools</h3><ul>${ABOUT.tools.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div></div></section>`;
+}
+function contact(){
+ return `<section class="page in"><h1>Contact</h1><div class="contact"><div><p>Tell me about your project, and I’ll reply within two working days.</p><p><a href="mailto:${EMAIL}">${EMAIL}</a></p></div>
+ <div><label for="cn">Your name</label><input id="cn" autocomplete="name">
+ <label for="ce">Your email</label><input id="ce" type="email" autocomplete="email">
+ <label for="cm">What do you need help with?</label><textarea id="cm" rows="5"></textarea>
+ <button class="btn" type="button" id="send">Send email</button></div></div></section>`;
+}
 
-    <script>
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Project modal functionality
-        const modal = document.getElementById('project-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalVideo = document.getElementById('modal-video');
-        const modalClient = document.getElementById('modal-client');
-        const modalDate = document.getElementById('modal-date');
-        const modalDescription = document.getElementById('modal-description');
-        const closeModal = document.querySelector('.modal-close');
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const project = JSON.parse(card.getAttribute('data-project'));
-                modalTitle.textContent = project.title;
-                modalVideo.querySelector('source').src = project.videoUrl;
-                modalVideo.load();
-                modalClient.textContent = `Client: ${project.client}`;
-                modalDate.textContent = `Date: ${project.date}`;
-                modalDescription.textContent = project.detailedDescription;
-                modal.style.display = 'block';
-            });
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            modalVideo.pause();
-            modalVideo.querySelector('source').src = '';
-        });
-
-        // Close modal when clicking outside content
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                modalVideo.pause();
-                modalVideo.querySelector('source').src = '';
-            }
-        });
-    </script>
+function route(){
+ const h = location.hash.slice(1) || "home";
+ document.body.classList.toggle("home", !/^(case-|work|about|contact)/.test(h));
+ let html;
+ if (h.startsWith("case-")) html = whole(h.slice(5));
+ else if (h === "work" || h.startsWith("work-")) html = work(h.slice(5));
+ else if (h === "about") html = about();
+ else if (h === "contact") html = contact();
+ else html = home();
+ view.innerHTML = html;
+ const base = h.split("-")[0];
+ document.querySelectorAll("nav a[data-nav]").forEach(a => a.toggleAttribute("aria-current", a.dataset.nav === base));
+ window.scrollTo(0,0);
+ const s = $("#send");
+ if (s) s.onclick = () => {
+  const b = encodeURIComponent(($("#cm").value||"") + "\n\n" + ($("#cn").value||"") + " (" + ($("#ce").value||"") + ")");
+  location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Project enquiry") + "&body=" + b;
+ };
+ document.title = (h.startsWith("case-") ? (PROJECTS.find(p => "case-"+p.id === h)||{title:"Work"}).title : base[0].toUpperCase()+base.slice(1)) + " | Goga Dzidziguri";
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
 </body>
 </html>
