@@ -33,10 +33,9 @@ main{min-height:70vh;padding:56px 0 96px}
 .tile :is(h2,h3){font-size:22px;margin:0 0 4px;font-weight:700}
 .tile p{margin:0;color:var(--mute);font-size:15px}
 .tile .tile-category{margin:14px 0 6px;color:var(--acc);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.meta{display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--mute);margin:0 0 40px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--mute);margin:0}
 .meta b{color:var(--ink);font-weight:500}
-.cols{display:grid;grid-template-columns:200px 1fr;gap:12px 40px;padding:28px 0;border-top:1px solid var(--line)}
-.cols h2{font-size:22px;font-weight:700}
+.cols{display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px 40px}
 .cols p{margin:0;max-width:62ch}
 .stats{display:flex;flex-wrap:wrap;gap:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 20px;min-width:150px}
@@ -112,21 +111,24 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 }
 .tile .art.art-photo{position:relative;padding:0;overflow:hidden;background:var(--card)}
 .tile .art-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.case-study{--case-space:clamp(24px,3vw,36px)}
+.case-heading,.case-cover{margin-bottom:var(--case-space)}
+.case-category{margin:0 0 10px;color:var(--acc);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .project-original{margin:-12px 0 16px;color:var(--mute)}
 .case-summary{max-width:62ch;margin:0 0 14px}
-.case-results,.case-cover{margin:0 0 28px}
-.case-results h2,.project-gallery h2{font-size:24px;margin:0 0 18px}
-.case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card)}
-.case-video{display:block;width:min(100%,720px);height:auto;aspect-ratio:16/9;border:0;background:var(--card)}
-.project-gallery{margin:32px 0 0}
+.case-section{padding-block:var(--case-space);border-top:1px solid var(--line)}
+.case-section h2{font-size:clamp(20px,2.2vw,24px);line-height:1.15}
+.case-section:not(.cols) h2{margin:0 0 18px}
+.case-study .next{margin-top:0;padding-bottom:0}
+.case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card);border-radius:4px}
+.case-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:4px;background:var(--card)}
 .project-media{display:grid;gap:18px}
-.project-media img{margin-inline:auto}
 .gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
 .gallery-swipe{display:none}
-.project-media--strip{grid-template-columns:repeat(3,minmax(0,1fr));max-width:960px}
+.project-media--strip{grid-template-columns:repeat(3,minmax(0,1fr))}
 .project-media--strip a{display:block;border-radius:4px}
 .project-media--strip a:focus-visible{outline-offset:-3px}
-.project-media--strip img{width:100%;border-radius:4px}
+.project-media--strip img{width:100%}
 @media (max-width:640px){
   .gallery-swipe{display:inline}
   .project-media--strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding-bottom:8px}
@@ -417,23 +419,26 @@ function caseStudy(project, section) {
       ? `<a href="${escapeHtml(src)}" target="_blank" rel="noopener" aria-label="Open full-size photo in a new tab: ${escapeHtml(alt)}">${image}</a>`
       : image;
   }).join("");
-  return `<article class="page in">
+  return `<article class="page case-study in">
     <a class="back-link" href="#${section}"><span aria-hidden="true">←</span> Back to ${backLabel}</a>
-    <h1>${escapeHtml(project.title)}</h1>
-    ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
-    <p class="case-summary">${escapeHtml(project.summary)}</p>
-    <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
-    ${results ? `<section class="case-results"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
+    <div class="case-heading">
+      <p class="case-category">${escapeHtml(project.category)}</p>
+      <h1>${escapeHtml(project.title)}</h1>
+      ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
+      <p class="case-summary">${escapeHtml(project.summary)}</p>
+      <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
+    </div>
+    ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
     ${project.videoEmbed ? `<div class="case-cover"><iframe class="case-video" src="${escapeHtml(project.videoEmbed)}" title="${escapeHtml(project.title)} campaign video" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
-    <section class="cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
-    <section class="cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
-    ${gallery ? `<section class="project-gallery">
+    <section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
+    <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
+    ${gallery ? `<section class="case-section project-gallery">
       <h2>${project.galleryStrip ? "Behind the scenes" : "Project visuals"}</h2>
       ${project.galleryStrip ? `<p class="gallery-note"><span class="gallery-swipe">Swipe to browse. </span>Select a photo to open it full size.</p>` : ""}
       <div class="project-media${project.galleryStrip ? " project-media--strip" : ""}">${gallery}</div>
     </section>` : ""}
-    ${project.showProjectLinks === false ? "" : `<div class="next">
+    ${project.showProjectLinks === false ? "" : `<div class="case-section next">
       ${project.link ? `<a class="btn" href="${escapeHtml(project.link[1])}">${escapeHtml(project.link[0])}</a>` : ""}
       <a class="more-work" href="#work">More projects</a>
     </div>`}
