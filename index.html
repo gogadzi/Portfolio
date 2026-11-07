@@ -76,12 +76,21 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .bio h2{font-size:24px;margin-top:36px}
 .bio ul{padding-left:20px}
 .bio li::marker{color:var(--acc)}
-:is(.about-projects,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
-:is(.about-projects,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
-.about-projects .tile{padding:20px;background:var(--card);border:1px solid var(--line);border-radius:4px}
-.about-projects .tile:hover{border-color:var(--mute)}
-.about-projects .art:not(.art-photo){aspect-ratio:auto;min-height:52px;padding:0;align-items:center}
-.about-projects,.contact{scroll-margin-top:80px}
+:is(.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+:is(.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
+.brands-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.brand-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none}
+.brand-card:hover{border-color:var(--mute)}
+.brand-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.brand-card h3{padding:14px;font-size:clamp(14px,1.7vw,20px);line-height:1.2}
+.about-projects{margin-top:32px}
+.about-projects h3{font-size:18px}
+.about-projects ul{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:0;list-style:none}
+.about-projects a{text-underline-offset:4px}
+.brands,.about-projects,.contact{scroll-margin-top:80px}
+@media (max-width:640px){
+  .brands-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+}
 .contact-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
 .email-copy{display:flex;align-items:center;gap:8px;max-width:100%}
 .email-copy span{overflow-wrap:anywhere}
@@ -227,6 +236,7 @@ const PROJECTS = [
   },
   {
     "id": "gig",
+    "brand": "GIG",
     category: "Website copy",
     "title": "GIG — Potential in Action",
     "original": "პოტენციალი მოქმედებაში",
@@ -252,6 +262,7 @@ const PROJECTS = [
   },
   {
     "id": "sos-good-news",
+    "brand": "SOS Children’s Villages Georgia",
     category: "Website copy",
     "title": "SOS Children’s Villages Georgia — Good News",
     "original": "კარგი ამბები",
@@ -276,6 +287,7 @@ const PROJECTS = [
   },
   {
     "id": "aldagi-car-insurance",
+    "brand": "Aldagi",
     category: "Brand campaign",
     "title": "Aldagi — Don’t Be Afraid, Get Insured",
     "original": "ნუ გეშინია, დააზღვიე",
@@ -311,6 +323,7 @@ const PROJECTS = [
   },
   {
     "id": "evex-take-care",
+    "brand": "Evex",
     category: "Brand campaign",
     "title": "Evex — Take Care of Yourself",
     "original": "თავს მოუარე",
@@ -347,6 +360,7 @@ const PROJECTS = [
   },
   {
     "id": "cellfie-make-a-wish",
+    "brand": "Cellfie",
     category: "Brand campaign",
     "title": "Cellfie — Make a Wish",
     "original": "ისურვე და აგიხდება",
@@ -369,6 +383,7 @@ const PROJECTS = [
   },
   {
     "id": "elit-melting-season",
+    "brand": "Elit",
     category: "Brand campaign",
     "title": "Elit — Melting Season",
     "original": "დნობის სეზონი",
@@ -461,6 +476,14 @@ function caseStudy(project, section) {
 }
 
 function about() {
+  const brands = workProjects.filter(project => project.brand && project.cover).map(project => `
+    <a class="brand-card" href="#case-${project.id}">
+      <img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async">
+      <h3>${escapeHtml(project.brand)}</h3>
+    </a>`).join("");
+  const featuredLinks = aboutProjects.map(project =>
+    `<li><a href="#case-${project.id}">${escapeHtml(project.title)}</a></li>`
+  ).join("");
   return `<section class="page in">
     <div class="bio">
       <h1>About me</h1>
@@ -473,9 +496,14 @@ function about() {
         <li>Copywriting for ads, landing pages and social media</li>
       </ul>
     </div>
-    <section id="about-projects" class="about-projects" tabindex="-1" aria-labelledby="about-projects-title">
-      <h2 id="about-projects-title">Featured projects</h2>
-      <div class="grid">${projectTiles(aboutProjects, "h3")}</div>
+    <section id="brands" class="brands" tabindex="-1" aria-labelledby="brands-title">
+      <h2 id="brands-title">Brands</h2>
+      <p class="intro">A selection of brands and organizations I’ve worked with.</p>
+      <div class="grid brands-grid">${brands}</div>
+      <section id="about-projects" class="about-projects" tabindex="-1" aria-labelledby="about-projects-title">
+        <h3 id="about-projects-title">Paid media &amp; podcasts</h3>
+        <ul>${featuredLinks}</ul>
+      </section>
     </section>
     <div class="next"><a class="btn" href="#work">View projects</a></div>
     <section id="contact" class="contact" tabindex="-1" aria-labelledby="contact-title">
@@ -500,7 +528,7 @@ function about() {
 function route(moveFocus = false) {
   const hash = location.hash.slice(1);
   const project = PROJECTS.find(item => hash === "case-" + item.id);
-  const aboutAnchor = hash === "contact" || hash === "about-projects";
+  const aboutAnchor = ["brands", "about-projects", "contact"].includes(hash);
   let page = "home";
   let title = "Marketing Strategist";
   let markup = home;
