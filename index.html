@@ -362,10 +362,7 @@ const PROJECTS = [
     "work": "We took the idea that everything melts in the Georgian summer and used it to announce Elit’s price drops on air conditioners.",
     "cover": "assets/projects/elit-melting-season-cover.webp",
     "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FElitElectronics%2Fvideos%2F578379208635568%2F&show_text=0&width=560",
-    "link": [
-      "Watch the Elit campaign",
-      "https://www.facebook.com/ElitElectronics/videos/578379208635568/"
-    ],
+    "showProjectLinks": false,
     "gallery": [],
     "results": []
   }
@@ -421,10 +418,10 @@ function caseStudy(project, section) {
     <section class="cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
     ${gallery ? `<section class="project-gallery"><h2>Project visuals</h2><div class="project-media">${gallery}</div></section>` : ""}
-    <div class="next">
+    ${project.showProjectLinks === false ? "" : `<div class="next">
       ${project.link ? `<a class="btn" href="${escapeHtml(project.link[1])}">${escapeHtml(project.link[0])}</a>` : ""}
       <a class="more-work" href="#work">More projects</a>
-    </div>
+    </div>`}
   </article>`;
 }
 
