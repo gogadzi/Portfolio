@@ -78,11 +78,19 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .bio li::marker{color:var(--acc)}
 :is(.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
 :is(.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
-.brands-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.brand-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none}
-.brand-card:hover{border-color:var(--mute)}
+.brands-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:20px}
+.brand-card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.brand-card:hover,.brand-card[open]{border-color:var(--mute)}
+.brand-card summary{list-style:none;cursor:pointer}
+.brand-card summary::-webkit-details-marker{display:none}
+.brand-card summary:focus-visible{outline-offset:-3px}
 .brand-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:var(--bg)}
-.brand-card h3{padding:14px;font-size:clamp(14px,1.7vw,20px);line-height:1.2}
+.brand-name{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px;font-size:clamp(14px,1.7vw,20px);font-weight:700;line-height:1.2;text-transform:uppercase;overflow-wrap:anywhere}
+.brand-chevron{flex:0 0 8px;height:8px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);transform:rotate(45deg) translateY(-2px)}
+.brand-card[open] .brand-chevron{transform:rotate(225deg) translateY(-2px)}
+.brand-description{padding:0 14px 14px;color:var(--mute);font-size:15px;line-height:1.5}
+.brand-description p{margin:0 0 12px}
+.brand-description a{color:var(--acc);text-underline-offset:4px}
 .about-projects{margin-top:32px}
 .about-projects h3{font-size:18px}
 .about-projects ul{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:0;list-style:none}
@@ -394,10 +402,10 @@ const PROJECTS = [
 ];
 
 const BRANDS = [
-  ["Formula", "https://tv.formula.ge/", "https://formulanews.ge/uploads_script3/articles/2021/06/30/ijmyy781nsdky1k.jpg"],
-  ["Mindset", "#case-mindset-with-mindia", "https://yt3.googleusercontent.com/wW7kQdW2tJQnSgGNnPRA0s138UMHSxy3b5YWRR2x_dctDvpryKWBxqdX9iryO20BgQpsTXSp1Q=s900-c-k-c0x00ffffff-no-rj"],
-  ["Sasha Katsman", "#case-audio-course-campaigns", "https://media.stapilo.com/katsman/images/8cb0dd95-1da8-424b-bb0e-58fd52009343/original.jpg"],
-  ["Holy Motors", "https://holymotors.com/", "https://holymotors.com/images/holymotors-share.png"]
+  ["Formula", "https://tv.formula.ge/", "https://formulanews.ge/uploads_script3/articles/2021/06/30/ijmyy781nsdky1k.jpg", "An independent Georgian broadcaster covering news and current affairs on television and online.", "Visit Formula"],
+  ["Mindset", "#case-mindset-with-mindia", "https://yt3.googleusercontent.com/wW7kQdW2tJQnSgGNnPRA0s138UMHSxy3b5YWRR2x_dctDvpryKWBxqdX9iryO20BgQpsTXSp1Q=s900-c-k-c0x00ffffff-no-rj", "A Georgian-language podcast about psychology and personal growth, hosted by Mindia.", "View Mindset case study"],
+  ["Sasha Katsman", "#case-audio-course-campaigns", "https://media.stapilo.com/katsman/images/8cb0dd95-1da8-424b-bb0e-58fd52009343/original.jpg", "An entrepreneur, mentor, and speaker who offers courses and consultations on personal and professional development.", "View Sasha Katsman case study"],
+  ["Holy Motors", "https://holymotors.com/", "https://holymotors.com/images/holymotors-share.png", "A Tbilisi creative studio working across brand strategy, visual identity, campaigns, and digital design.", "Visit Holy Motors"]
 ];
 
 const aboutProjects = PROJECTS.slice(0, 3);
@@ -477,11 +485,17 @@ function caseStudy(project, section) {
 }
 
 function about() {
-  const brands = BRANDS.map(([name, href, image]) => `
-    <a class="brand-card" href="${escapeHtml(href)}">
-      <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
-      <h3>${escapeHtml(name)}</h3>
-    </a>`).join("");
+  const brands = BRANDS.map(([name, href, image, description, linkLabel]) => `
+    <details class="brand-card" name="brand-summary">
+      <summary>
+        <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
+        <span class="brand-name">${escapeHtml(name)}<span class="brand-chevron" aria-hidden="true"></span></span>
+      </summary>
+      <div class="brand-description">
+        <p>${escapeHtml(description)}</p>
+        <a href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
+      </div>
+    </details>`).join("");
   const featuredLinks = aboutProjects.map(project =>
     `<li><a href="#case-${project.id}">${escapeHtml(project.title)}</a></li>`
   ).join("");
