@@ -121,6 +121,17 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .project-gallery{margin:32px 0 0}
 .project-media{display:grid;gap:18px}
 .project-media img{margin-inline:auto}
+.gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
+.gallery-swipe{display:none}
+.project-media--strip{grid-template-columns:repeat(3,minmax(0,1fr));max-width:960px}
+.project-media--strip a{display:block;border-radius:4px}
+.project-media--strip a:focus-visible{outline-offset:-3px}
+.project-media--strip img{width:100%;border-radius:4px}
+@media (max-width:640px){
+  .gallery-swipe{display:inline}
+  .project-media--strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .project-media--strip a{scroll-snap-align:start}
+}
 .more-work{margin-inline-start:auto}
 </style>
 </head>
@@ -265,6 +276,7 @@ const PROJECTS = [
     "brief": "Develop a campaign for Aldagi’s car insurance.",
     "work": "At Holy Motors, we built a comic world where people afraid of making mistakes wrap themselves and everything around them in bubble wrap.",
     "cover": "assets/projects/aldagi-car-insurance-cover.webp",
+    "galleryStrip": true,
     "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Faldagi%2Fvideos%2F1111962429899670%2F&show_text=0&width=560",
     "showProjectLinks": false,
     "gallery": [
@@ -272,19 +284,19 @@ const PROJECTS = [
         "assets/projects/aldagi-car-insurance-1.webp",
         1096,
         1468,
-        "Aldagi campaign still 1"
+        "A dog and scooter in bubble wrap on set"
       ],
       [
         "assets/projects/aldagi-car-insurance-2.webp",
         1102,
         1476,
-        "Aldagi campaign still 2"
+        "An actor riding a bubble-wrapped bicycle with the film crew behind him"
       ],
       [
         "assets/projects/aldagi-car-insurance-3.webp",
         1110,
         1476,
-        "Aldagi campaign still 3"
+        "A row of bubble-wrapped cars parked beside an apartment building"
       ]
     ],
     "results": []
@@ -399,9 +411,12 @@ function caseStudy(project, section) {
   const results = project.results.map(([value, label]) =>
     `<div class="stat"><b>${escapeHtml(value)}</b><span>${escapeHtml(label)}</span></div>`
   ).join("");
-  const gallery = (project.gallery ?? []).map(([src, width, height, alt]) =>
-    `<img src="${escapeHtml(src)}" width="${width}" height="${height}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">`
-  ).join("");
+  const gallery = (project.gallery ?? []).map(([src, width, height, alt]) => {
+    const image = `<img src="${escapeHtml(src)}" width="${width}" height="${height}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">`;
+    return project.galleryStrip
+      ? `<a href="${escapeHtml(src)}" target="_blank" rel="noopener" aria-label="Open full-size photo in a new tab: ${escapeHtml(alt)}">${image}</a>`
+      : image;
+  }).join("");
   return `<article class="page in">
     <a class="back-link" href="#${section}"><span aria-hidden="true">←</span> Back to ${backLabel}</a>
     <h1>${escapeHtml(project.title)}</h1>
@@ -413,7 +428,11 @@ function caseStudy(project, section) {
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     <section class="cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
-    ${gallery ? `<section class="project-gallery"><h2>Project visuals</h2><div class="project-media">${gallery}</div></section>` : ""}
+    ${gallery ? `<section class="project-gallery">
+      <h2>${project.galleryStrip ? "Behind the scenes" : "Project visuals"}</h2>
+      ${project.galleryStrip ? `<p class="gallery-note"><span class="gallery-swipe">Swipe to browse. </span>Select a photo to open it full size.</p>` : ""}
+      <div class="project-media${project.galleryStrip ? " project-media--strip" : ""}">${gallery}</div>
+    </section>` : ""}
     ${project.showProjectLinks === false ? "" : `<div class="next">
       ${project.link ? `<a class="btn" href="${escapeHtml(project.link[1])}">${escapeHtml(project.link[0])}</a>` : ""}
       <a class="more-work" href="#work">More projects</a>
