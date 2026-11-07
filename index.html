@@ -5,31 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Goga Dzidziguri | Marketing Strategist</title>
 <meta name="description" content="Goga Dzidziguri, a marketing strategist with eight years of experience in paid media, social growth and copywriting. View selected work.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FFFFFF;--ink:#1A1A1A;--mute:#767676;--line:#E8E8E8;--acc:#1A1A1A;--onacc:#FFFFFF;--card:#FAFAFA;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--card:#1C1B3A;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--card:#1C1B3A;color-scheme:dark}
-:root:has(body.home){--bg:#000;--ink:#D8D8D8;--mute:#B3B3B3;--line:#292929;--acc:#FFF3A0;--onacc:#000;color-scheme:dark}
+:root{
+  --bg:#000;--ink:#D8D8D8;--mute:#B3B3B3;--line:#292929;--acc:#FFF3A0;--onacc:#000;--card:#202020;
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--bg) radial-gradient(ellipse at 76% 42%,var(--card) 0%,var(--bg) 68%) fixed;
+  color-scheme:dark;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
-h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.02;margin:0;letter-spacing:-.025em}
+body{margin:0;color:var(--ink);font:400 17px/1.6 var(--font)}
+h1,h2{line-height:1.02;margin:0;letter-spacing:-.025em}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--acc);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
 .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font:800 22px "Bricolage Grotesque",sans-serif;text-decoration:none;letter-spacing:-.03em}
+.logo{font:700 22px var(--font);text-decoration:none;letter-spacing:-.03em}
 header nav{display:flex;gap:28px;align-items:center}
 main{min-height:70vh;padding:56px 0 96px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px}
 .tile{text-decoration:none;display:block}
-.tile .art{aspect-ratio:4/3;border-radius:0;display:flex;align-items:flex-end;padding:18px;color:#17163A;font:800 clamp(28px,3vw,40px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;transition:transform .2s}
+.tile .art{aspect-ratio:4/3;border-radius:0;display:flex;align-items:flex-end;padding:18px;background:var(--card);color:var(--acc);font:700 clamp(28px,3vw,40px)/1 var(--font);letter-spacing:-.03em;transition:transform .2s}
 .tile:hover .art{transform:translateY(-4px)}
 .tile h2{font-size:22px;margin:14px 0 2px;font-weight:700}
 .tile p{margin:0;color:var(--mute);font-size:15px}
@@ -40,10 +39,10 @@ main{min-height:70vh;padding:56px 0 96px}
 .cols p{margin:0;max-width:62ch}
 .stats{display:flex;flex-wrap:wrap;gap:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 20px;min-width:150px}
-.stat b{display:block;font:800 34px "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.stat b{display:block;font:700 34px var(--font);letter-spacing:-.03em}
 .stat span{color:var(--mute);font-size:15px}
 .next{margin-top:56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.btn{display:inline-block;background:var(--acc);color:var(--onacc);font:700 16px "DM Sans",sans-serif;padding:14px 26px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
+.btn{display:inline-block;background:var(--acc);color:var(--onacc);font:700 16px var(--font);padding:14px 26px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
 .btn:hover{filter:brightness(1.1)}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
 footer .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 32px}
@@ -51,18 +50,18 @@ body.home::before{display:none}
 body.home header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;background:transparent;border-bottom:0}
 body.home main{padding:0;min-height:0}
 body.home main .wrap{max-width:none;padding:0}
-.landing{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw 9vh;overflow:hidden;background:radial-gradient(ellipse at 76% 42%,#202020 0%,var(--bg) 68%)}
+.landing{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw 9vh;overflow:hidden}
 .landing>*{position:relative;z-index:1}
-.blurb{margin-left:62%;max-width:38ch;font:400 clamp(16px,1.3vw,20px)/1.55 "DM Sans",sans-serif}
+.blurb{margin-left:62%;max-width:38ch;font-size:clamp(16px,1.3vw,20px);line-height:1.55}
 .blurb p{margin:0}
 .blurb p + p{color:var(--mute)}
 .blurb .role{font-size:clamp(13px,1.1vw,16px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-.landing h1{font-size:clamp(48px,9vw,160px);font-weight:800;line-height:.95;letter-spacing:-.055em;margin-top:3vh}
+.landing h1{font-size:clamp(48px,9vw,160px);font-weight:700;line-height:.95;letter-spacing:-.055em;margin-top:3vh}
 .in{animation:in .5s ease both}
 @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-nav a{font:500 16px "DM Sans",system-ui,sans-serif;text-decoration:none;padding:8px 0}
+nav a{font:500 16px var(--font);text-decoration:none;padding:8px 0}
 nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:6px}
 .bar{gap:16px}
 .landing{padding-bottom:max(7vh,calc(env(safe-area-inset-bottom,0px) + 24px))}
@@ -129,7 +128,7 @@ const PROFILE = { email: "", linkedin: "", resume: "" };
 const PROJECTS = [
   {
     id: "mindset-with-mindia", title: "Mindset with Mindia",
-    role: "Social media, copy and reporting", color: "#F2E85C", art: "60K+",
+    role: "Social media, copy and reporting", art: "60K+",
     summary: "Growing the Facebook audience for a Georgian-language psychology podcast.",
     brief: "Build a Georgian audience for a psychology podcast and give people a reason to watch full episodes.",
     work: "I worked on short clips, episode announcements and platform-specific copy. The weekly YouTube episodes gave us a steady source of material for Facebook.",
@@ -138,7 +137,7 @@ const PROJECTS = [
   },
   {
     id: "audio-course-campaigns", title: "Sasha Katsman Audiocourses",
-    role: "Meta Ads and campaign copy", color: "#9BE3C4", art: "Meta Ads",
+    role: "Meta Ads and campaign copy", art: "Meta Ads",
     summary: "Awareness and sales campaigns for two Georgian-language audio courses.",
     brief: "Introduce two courses to cold audiences and give interested viewers a path to purchase.",
     work: "I built separate messaging for the business and personal development courses, adapted the creative for awareness and sales, and set up UTMs and retargeting audiences.",
@@ -147,7 +146,7 @@ const PROJECTS = [
   },
   {
     id: "katsman-business-podcast", title: "Katsman Business Podcast",
-    role: "Podcast copy and sponsor materials", color: "#B9B6FF", art: "23K",
+    role: "Podcast copy and sponsor materials", art: "23K",
     summary: "Episode promotion and sponsor materials for a Georgian business podcast.",
     brief: "Help audiences discover new episodes and make sponsor placements clear and consistent.",
     work: "I wrote promotional copy for episodes and worked on sponsor materials for announcements, thumbnails and in-episode integrations.",
@@ -350,7 +349,7 @@ function work() {
     <a class="tile" href="#case-${project.id}">
       ${project.cover
         ? `<div class="art art-photo"><img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
-        : `<div class="art" style="background:${project.color}" aria-hidden="true">${escapeHtml(project.art)}</div>`}
+        : `<div class="art" aria-hidden="true">${escapeHtml(project.art)}</div>`}
       <h2>${escapeHtml(project.title)}</h2>
       <p>${escapeHtml(project.summary)}</p>
     </a>`).join("");
