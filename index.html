@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Goga Dzidziguri | Marketing Strategist</title>
-<meta name="description" content="Goga Dzidziguri, a marketing strategist with eight years of experience in paid media, social growth and copywriting. View selected work.">
+<meta name="description" content="Goga Dzidziguri, a marketing strategist with eight years of experience in paid media, social growth and copywriting. View projects.">
 <style>
 :root{
   --bg:#000;--ink:#D8D8D8;--mute:#B3B3B3;--line:#292929;--acc:#DEDAD2;--onacc:#000;--card:#202020;
@@ -129,7 +129,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
   <div class="wrap bar">
     <a class="logo" href="#home">Goga Dzidziguri</a>
     <nav aria-label="Main">
-      <a href="#work" data-nav="work">Work</a>
+      <a href="#work" data-nav="work">Projects</a>
       <a href="#about" data-nav="about">About</a>
       <span class="nav-contact">
         <a href="mailto:goggadzidziguri@gmail.com" aria-label="Email Goga">
@@ -393,14 +393,14 @@ function projectTiles(projects, headingTag) {
 
 function work() {
   return `<section class="page in">
-    <h1>Selected work</h1>
+    <h1>Projects</h1>
     <p class="intro">Brand campaigns, website copy, and creative projects. <a class="featured-link" href="#about-projects">See paid media and podcast projects</a>.</p>
     <div class="grid">${projectTiles(workProjects, "h2")}</div>
   </section>`;
 }
 
 function caseStudy(project, section) {
-  const backLabel = section === "about" ? "About" : "selected work";
+  const backLabel = section === "about" ? "About" : "Projects";
   const results = project.results.map(([value, label]) =>
     `<div class="stat"><b>${escapeHtml(value)}</b><span>${escapeHtml(label)}</span></div>`
   ).join("");
@@ -420,7 +420,7 @@ function caseStudy(project, section) {
     ${gallery ? `<section class="project-gallery"><h2>Project visuals</h2><div class="project-media">${gallery}</div></section>` : ""}
     <div class="next">
       ${project.link ? `<a class="btn" href="${escapeHtml(project.link[1])}">${escapeHtml(project.link[0])}</a>` : ""}
-      <a class="more-work" href="#work">More work</a>
+      <a class="more-work" href="#work">More projects</a>
     </div>
   </article>`;
 }
@@ -442,7 +442,7 @@ function about() {
       <h2 id="about-projects-title">Featured projects</h2>
       <div class="grid">${projectTiles(aboutProjects, "h3")}</div>
     </section>
-    <div class="next"><a class="btn" href="#work">View selected work</a></div>
+    <div class="next"><a class="btn" href="#work">View projects</a></div>
     <section id="contact" class="contact" tabindex="-1" aria-labelledby="contact-title">
       <h2 id="contact-title">Get in touch</h2>
       <div class="contact-links">
@@ -476,7 +476,7 @@ function route(moveFocus = false) {
     markup = caseStudy(project, page);
   } else if (hash === "work" || hash.startsWith("work-") || hash.startsWith("case-")) {
     page = "work";
-    title = "Selected Work";
+    title = "Projects";
     markup = work();
   } else if (hash === "about" || aboutAnchor) {
     page = "about";
