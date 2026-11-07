@@ -27,9 +27,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 header nav{display:flex;gap:28px;align-items:center}
 main{min-height:70vh;padding:56px 0 96px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px}
+.project-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+.project-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.project-filter{min-height:44px;padding:8px 15px;border:1px solid #737373;border-radius:999px;background:var(--card);color:var(--ink);font:700 14px var(--font);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.project-filter:hover{border-color:var(--acc)}
+.project-filter[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.project-count{margin:0 0 20px;color:var(--mute);font-size:14px}
 .tile{text-decoration:none;display:block}
 .tile .art{aspect-ratio:4/3;border-radius:0;display:flex;align-items:flex-end;padding:18px;background:var(--card);color:var(--acc);font:700 clamp(28px,3vw,40px)/1 var(--font);letter-spacing:-.03em;transition:transform .2s}
-.tile:hover .art{transform:translateY(-4px)}
+.tile:is(:hover,:focus-visible) h2{text-decoration:underline;text-underline-offset:4px}
 .tile :is(h2,h3){font-size:22px;margin:0 0 4px;font-weight:700}
 .tile p{margin:0;color:var(--mute);font-size:15px}
 .tile .tile-category{margin:14px 0 6px;color:var(--acc);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
@@ -59,6 +65,14 @@ body.home main .wrap{max-width:none;padding:0}
 .landing h1{font-size:clamp(48px,9vw,160px);font-weight:700;line-height:.95;letter-spacing:-.055em;margin-top:3vh}
 .in{animation:in .5s ease both}
 @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .landing .blurb{animation:in .55s ease-out both}
+  .landing h1{animation:in .65s ease-out .12s both}
+  :is(.project-grid,.brands-grid) > a{animation:in .35s ease-out calc(var(--card-index,0) * 40ms) backwards}
+  .tile:is(:hover,:focus-visible) .art{transform:translateY(-4px)}
+  .brand-card{transition:border-color .2s,translate .2s}
+  .brand-card:is(:hover,:focus-visible){translate:0 -4px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 nav a{font:500 16px var(--font);text-decoration:none;padding:8px 0}
@@ -79,18 +93,16 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 :is(.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
 :is(.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
 .brands-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:20px}
-.brand-card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.brand-card:hover,.brand-card[open]{border-color:var(--mute)}
-.brand-card summary{list-style:none;cursor:pointer}
-.brand-card summary::-webkit-details-marker{display:none}
-.brand-card summary:focus-visible{outline-offset:-3px}
-.brand-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:var(--bg)}
+.brand-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none}
+.brand-card:hover{border-color:var(--mute)}
+.brand-card img,.brand-page-image{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:var(--bg)}
 .brand-name{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px;font-size:clamp(14px,1.7vw,20px);font-weight:700;line-height:1.2;text-transform:uppercase;overflow-wrap:anywhere}
-.brand-chevron{flex:0 0 8px;height:8px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);transform:rotate(45deg) translateY(-2px)}
-.brand-card[open] .brand-chevron{transform:rotate(225deg) translateY(-2px)}
-.brand-description{padding:0 14px 14px;color:var(--mute);font-size:15px;line-height:1.5}
-.brand-description p{margin:0 0 12px}
-.brand-description a{color:var(--acc);text-underline-offset:4px}
+.brand-page-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:clamp(20px,4vw,48px);max-width:960px}
+.brand-page-image{border:1px solid var(--line);border-radius:4px}
+.brand-page-description p{margin:0 0 20px;max-width:55ch}
+@media (max-width:640px){
+  .brand-page-content{grid-template-columns:minmax(0,1fr)}
+}
 .about-projects{margin-top:32px}
 .about-projects h3{font-size:18px}
 .about-projects ul{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:0;list-style:none}
@@ -402,10 +414,10 @@ const PROJECTS = [
 ];
 
 const BRANDS = [
-  ["Formula", "https://tv.formula.ge/", "https://formulanews.ge/uploads_script3/articles/2021/06/30/ijmyy781nsdky1k.jpg", "An independent Georgian broadcaster covering news and current affairs on television and online.", "Visit Formula"],
-  ["Mindset", "#case-mindset-with-mindia", "https://yt3.googleusercontent.com/wW7kQdW2tJQnSgGNnPRA0s138UMHSxy3b5YWRR2x_dctDvpryKWBxqdX9iryO20BgQpsTXSp1Q=s900-c-k-c0x00ffffff-no-rj", "A Georgian-language podcast about psychology and personal growth, hosted by Mindia.", "View Mindset case study"],
-  ["Sasha Katsman", "#case-audio-course-campaigns", "https://media.stapilo.com/katsman/images/8cb0dd95-1da8-424b-bb0e-58fd52009343/original.jpg", "An entrepreneur, mentor, and speaker who offers courses and consultations on personal and professional development.", "View Sasha Katsman case study"],
-  ["Holy Motors", "https://holymotors.com/", "https://holymotors.com/images/holymotors-share.png", "A Tbilisi creative studio working across brand strategy, visual identity, campaigns, and digital design.", "Visit Holy Motors"]
+  ["formula", "Formula", "https://tv.formula.ge/", "https://formulanews.ge/uploads_script3/articles/2021/06/30/ijmyy781nsdky1k.jpg", "An independent Georgian broadcaster covering news and current affairs on television and online.", "Visit Formula"],
+  ["mindset", "Mindset", "#case-mindset-with-mindia", "https://yt3.googleusercontent.com/wW7kQdW2tJQnSgGNnPRA0s138UMHSxy3b5YWRR2x_dctDvpryKWBxqdX9iryO20BgQpsTXSp1Q=s900-c-k-c0x00ffffff-no-rj", "A Georgian-language podcast about psychology and personal growth, hosted by Mindia.", "View Mindset case study"],
+  ["sasha-katsman", "Sasha Katsman", "#case-audio-course-campaigns", "https://media.stapilo.com/katsman/images/8cb0dd95-1da8-424b-bb0e-58fd52009343/original.jpg", "An entrepreneur, mentor, and speaker who offers courses and consultations on personal and professional development.", "View Sasha Katsman case study"],
+  ["holy-motors", "Holy Motors", "https://holymotors.com/", "https://holymotors.com/images/holymotors-share.png", "A Tbilisi creative studio working across brand strategy, visual identity, campaigns, and digital design.", "Visit Holy Motors"]
 ];
 
 const aboutProjects = PROJECTS.slice(0, 3);
@@ -418,23 +430,29 @@ const escapeHtml = value => String(value).replace(/[&<>"]/g, char => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"
 }[char]));
 
-function projectTiles(projects, headingTag) {
-  return projects.map(project => `
-    <a class="tile" href="#case-${project.id}">
+function projectTiles(projects) {
+  return projects.map((project, index) => `
+    <a class="tile" href="#case-${project.id}" style="--card-index:${index}">
       ${project.cover
         ? `<div class="art art-photo"><img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
         : `<div class="art" aria-hidden="true">${escapeHtml(project.art)}</div>`}
       <p class="tile-category">${escapeHtml(project.category)}</p>
-      <${headingTag}>${escapeHtml(project.title)}</${headingTag}>
+      <h2>${escapeHtml(project.title)}</h2>
       <p>${escapeHtml(project.summary)}</p>
     </a>`).join("");
 }
 
 function work() {
+  const categories = [...new Set(workProjects.map(project => project.category))];
   return `<section class="page in">
     <h1>Projects</h1>
     <p class="intro">Brand campaigns, website copy, and creative projects. <a class="featured-link" href="#about-projects">See paid media and podcast projects</a>.</p>
-    <div class="grid">${projectTiles(workProjects, "h2")}</div>
+    <div class="project-filters" role="group" aria-label="Filter projects by category">
+      <button class="project-filter" type="button" data-project-filter="" aria-pressed="true" aria-controls="project-grid">All projects</button>
+      ${categories.map(category => `<button class="project-filter" type="button" data-project-filter="${escapeHtml(category)}" aria-pressed="false" aria-controls="project-grid">${escapeHtml(category)}</button>`).join("")}
+    </div>
+    <p class="project-count" role="status">${workProjects.length} projects</p>
+    <div class="grid project-grid" id="project-grid">${projectTiles(workProjects)}</div>
   </section>`;
 }
 
@@ -485,17 +503,11 @@ function caseStudy(project, section) {
 }
 
 function about() {
-  const brands = BRANDS.map(([name, href, image, description, linkLabel]) => `
-    <details class="brand-card" name="brand-summary">
-      <summary>
-        <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
-        <span class="brand-name">${escapeHtml(name)}<span class="brand-chevron" aria-hidden="true"></span></span>
-      </summary>
-      <div class="brand-description">
-        <p>${escapeHtml(description)}</p>
-        <a href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
-      </div>
-    </details>`).join("");
+  const brands = BRANDS.map(([id, name, , image], index) => `
+    <a class="brand-card" href="#brand-${id}" style="--card-index:${index}">
+      <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
+      <span class="brand-name">${escapeHtml(name)}<span aria-hidden="true">↗</span></span>
+    </a>`).join("");
   const featuredLinks = aboutProjects.map(project =>
     `<li><a href="#case-${project.id}">${escapeHtml(project.title)}</a></li>`
   ).join("");
@@ -540,9 +552,24 @@ function about() {
   </section>`;
 }
 
+function brandPage([, name, href, image, description, linkLabel]) {
+  return `<article class="page in">
+    <a class="back-link" href="#brands"><span aria-hidden="true">←</span> Back to Brands</a>
+    <h1>${escapeHtml(name)}</h1>
+    <div class="brand-page-content">
+      <img class="brand-page-image" src="${escapeHtml(image)}" alt="" width="400" height="300" decoding="async">
+      <div class="brand-page-description">
+        <p>${escapeHtml(description)}</p>
+        <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
+      </div>
+    </div>
+  </article>`;
+}
+
 function route(moveFocus = false) {
   const hash = location.hash.slice(1);
   const project = PROJECTS.find(item => hash === "case-" + item.id);
+  const brand = BRANDS.find(([id]) => hash === "brand-" + id);
   const aboutAnchor = ["brands", "about-projects", "contact"].includes(hash);
   let page = "home";
   let title = "Marketing Strategist";
@@ -556,6 +583,10 @@ function route(moveFocus = false) {
     page = "work";
     title = "Projects";
     markup = work();
+  } else if (brand) {
+    page = "about";
+    title = brand[1];
+    markup = brandPage(brand);
   } else if (hash === "about" || aboutAnchor) {
     page = "about";
     title = "About";
@@ -582,6 +613,18 @@ function route(moveFocus = false) {
 $(".skip").addEventListener("click", event => {
   event.preventDefault();
   $("#main").focus();
+});
+view.addEventListener("click", event => {
+  const button = event.target.closest("[data-project-filter]");
+  if (!button || button.getAttribute("aria-pressed") === "true") return;
+
+  const category = button.dataset.projectFilter;
+  const matches = category ? workProjects.filter(project => project.category === category) : workProjects;
+  button.closest(".project-filters").querySelectorAll("button").forEach(filter => {
+    filter.setAttribute("aria-pressed", String(filter === button));
+  });
+  $("#project-grid").innerHTML = projectTiles(matches);
+  $(".project-count").textContent = matches.length === 1 ? "1 project" : `${matches.length} projects`;
 });
 view.addEventListener("click", async event => {
   const button = event.target.closest("[data-copy-email]");
