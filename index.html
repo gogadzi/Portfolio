@@ -235,6 +235,7 @@ const PROJECTS = [
     "brief": "GIG refreshed its strategy and visual identity with Holy Motors and needed copy for its new website.",
     "work": "I wrote the new website copy in Georgian and English as part of the Holy Motors team.",
     "cover": "assets/projects/gig-cover.webp",
+    "closingVideoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fgig.georgia%2Fvideos%2F1666663024178214%2F&show_text=0&width=560",
     "gallery": [
       [
         "assets/projects/gig-1.webp",
@@ -443,7 +444,10 @@ function caseStudy(project, section) {
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     <section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
-    ${project.closingVideoEmbed ? `<section class="case-section"><h2>More from ${escapeHtml(project.title)}</h2>${caseVideo(project.closingVideoEmbed, project.title + " video 2", project.portraitVideo)}</section>` : ""}
+    ${project.closingVideoEmbed ? `<section class="case-section">
+      <h2>${project.videoEmbed ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
+      ${caseVideo(project.closingVideoEmbed, project.title + (project.videoEmbed ? " video 2" : " project video"), project.portraitVideo)}
+    </section>` : ""}
     ${gallery ? `<section class="case-section project-gallery">
       <h2>${project.galleryStrip ? "Behind the scenes" : "Project visuals"}</h2>
       ${project.galleryStrip ? `<p class="gallery-note"><span class="gallery-swipe">Swipe to browse. </span>Select a photo to open it full size.</p>` : ""}
