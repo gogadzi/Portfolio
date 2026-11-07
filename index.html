@@ -7,7 +7,7 @@
 <meta name="description" content="Goga Dzidziguri, a marketing strategist with eight years of experience in paid media, social growth and copywriting. View selected work.">
 <style>
 :root{
-  --bg:#000;--ink:#D8D8D8;--mute:#B3B3B3;--line:#292929;--acc:#FFF3A0;--onacc:#000;--card:#202020;
+  --bg:#000;--ink:#D8D8D8;--mute:#B3B3B3;--line:#292929;--acc:#9CC9FF;--onacc:#000;--card:#202020;
   --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
   background:var(--bg) radial-gradient(ellipse at 76% 42%,var(--card) 0%,var(--bg) 68%) fixed;
   color-scheme:dark;
@@ -44,6 +44,9 @@ main{min-height:70vh;padding:56px 0 96px}
 .next{margin-top:56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .btn{display:inline-block;background:var(--acc);color:var(--onacc);font:700 16px var(--font);padding:14px 26px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
 .btn:hover{filter:brightness(1.1)}
+.back-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-bottom:24px;padding:8px 16px;border:1px solid #737373;border-radius:999px;background:var(--card);color:var(--ink);font:700 14px/1.3 var(--font);text-decoration:none}
+.back-link span{color:var(--acc);font-size:18px;line-height:1}
+.back-link:hover{border-color:var(--acc);color:var(--acc)}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
 footer .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 32px}
 body.home::before{display:none}
@@ -373,7 +376,7 @@ function work() {
 }
 
 function caseStudy(project, section) {
-  const backLabel = section === "about" ? "About" : "Selected work";
+  const backLabel = section === "about" ? "About" : "selected work";
   const results = project.results.map(([value, label]) =>
     `<div class="stat"><b>${escapeHtml(value)}</b><span>${escapeHtml(label)}</span></div>`
   ).join("");
@@ -384,7 +387,7 @@ function caseStudy(project, section) {
     `<img src="${escapeHtml(src)}" width="${width}" height="${height}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">`
   ).join("");
   return `<article class="page in">
-    <p><a href="#${section}">← ${backLabel}</a></p>
+    <a class="back-link" href="#${section}"><span aria-hidden="true">←</span> Back to ${backLabel}</a>
     <h1>${escapeHtml(project.title)}</h1>
     ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
     <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
