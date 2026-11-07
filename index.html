@@ -26,9 +26,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .logo{font:800 22px "Bricolage Grotesque",sans-serif;text-decoration:none;letter-spacing:-.03em}
 header nav{display:flex;gap:28px;align-items:center}
 main{min-height:70vh;padding:56px 0 96px}
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 36px}
-.filters a{display:inline-block;border:1.5px solid var(--ink);border-radius:99px;padding:6px 16px;text-decoration:none;font-weight:500;font-size:15px}
-.filters a[aria-current]{background:var(--ink);color:var(--bg)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px}
 .tile{text-decoration:none;display:block}
 .tile .art{aspect-ratio:4/3;border-radius:0;display:flex;align-items:flex-end;padding:18px;color:#17163A;font:800 clamp(28px,3vw,40px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;transition:transform .2s}
@@ -133,10 +130,9 @@ body.home header :focus-visible,.landing :focus-visible{outline-color:#FFF3A0}
 // Fill in these details when they are ready. Empty values stay hidden.
 const PROFILE = { email: "", linkedin: "", resume: "" };
 
-const FOLDERS = {campaigns: "Campaigns", social: "Social growth", content: "Content and copy"};
 const PROJECTS = [
   {
-    id: "mindset-with-mindia", title: "Mindset with Mindia", folder: "social",
+    id: "mindset-with-mindia", title: "Mindset with Mindia",
     role: "Social media, copy and reporting", color: "#F2E85C", art: "60K+",
     summary: "Growing the Facebook audience for a Georgian-language psychology podcast.",
     brief: "Build a Georgian audience for a psychology podcast and give people a reason to watch full episodes.",
@@ -145,7 +141,7 @@ const PROJECTS = [
     link: ["Watch Mindset with Mindia", "https://www.youtube.com/@MindsetwithMindia"]
   },
   {
-    id: "audio-course-campaigns", title: "Sasha Katsman Audiocourses", folder: "campaigns",
+    id: "audio-course-campaigns", title: "Sasha Katsman Audiocourses",
     role: "Meta Ads and campaign copy", color: "#9BE3C4", art: "Meta Ads",
     summary: "Awareness and sales campaigns for two Georgian-language audio courses.",
     brief: "Introduce two courses to cold audiences and give interested viewers a path to purchase.",
@@ -154,7 +150,7 @@ const PROJECTS = [
     link: ["View the business course", "https://www.sashakatsman.com/ka-ge/audiocourseforbusiness"]
   },
   {
-    id: "katsman-business-podcast", title: "Katsman Business Podcast", folder: "content",
+    id: "katsman-business-podcast", title: "Katsman Business Podcast",
     role: "Podcast copy and sponsor materials", color: "#B9B6FF", art: "23K",
     summary: "Episode promotion and sponsor materials for a Georgian business podcast.",
     brief: "Help audiences discover new episodes and make sponsor placements clear and consistent.",
@@ -165,7 +161,6 @@ const PROJECTS = [
     "id": "megreels",
     "title": "Megreels",
     "original": "იბჩუათ მარგალურო!",
-    "folder": "content",
     "role": "Creator · Personal project",
     "summary": "A short-form video project about the Megrelian language.",
     "brief": "Bring Megrelian to a wider audience and give people a reason to listen to and speak the language.",
@@ -179,7 +174,6 @@ const PROJECTS = [
     "id": "gig",
     "title": "GIG — Potential in Action",
     "original": "პოტენციალი მოქმედებაში",
-    "folder": "content",
     "role": "Georgian and English website copy",
     "summary": "Bilingual website copy for a Georgian multi-industry holding company.",
     "brief": "GIG refreshed its strategy and visual identity with Holy Motors and needed copy for its new website.",
@@ -204,7 +198,6 @@ const PROJECTS = [
     "id": "sos-good-news",
     "title": "SOS Children’s Villages Georgia — Good News",
     "original": "კარგი ამბები",
-    "folder": "content",
     "role": "Website copy · Holy Motors",
     "summary": "Website copy for a nonprofit supporting children and families in Georgia.",
     "brief": "Refresh the website for the Georgian branch of SOS Children’s Villages, which supports children living in poverty and children without parental care.",
@@ -229,7 +222,6 @@ const PROJECTS = [
     "id": "aldagi-car-insurance",
     "title": "Aldagi — Don’t Be Afraid, Get Insured",
     "original": "ნუ გეშინია, დააზღვიე",
-    "folder": "campaigns",
     "role": "Campaign development · Holy Motors team",
     "summary": "A car insurance campaign that turned everyday caution into comedy.",
     "brief": "Develop a campaign for Aldagi’s car insurance.",
@@ -266,7 +258,6 @@ const PROJECTS = [
     "id": "evex-take-care",
     "title": "Evex — Take Care of Yourself",
     "original": "თავს მოუარე",
-    "folder": "campaigns",
     "role": "Campaign team",
     "summary": "A short film and a site with 1,001 reasons to take care of yourself.",
     "brief": "Bring Evex’s refreshed strategy to life through the everyday reasons people want to live longer.",
@@ -303,7 +294,6 @@ const PROJECTS = [
     "id": "cellfie-make-a-wish",
     "title": "Cellfie — Make a Wish",
     "original": "ისურვე და აგიხდება",
-    "folder": "campaigns",
     "role": "Concept, script and copy · Holy Motors",
     "summary": "A singing genie helped launch Cellfie’s refreshed loyalty platform.",
     "brief": "Introduce the new range of offers available to Cellfie subscribers through its refreshed loyalty platform.",
@@ -328,7 +318,6 @@ const PROJECTS = [
     "id": "elit-melting-season",
     "title": "Elit — Melting Season",
     "original": "დნობის სეზონი",
-    "folder": "campaigns",
     "role": "Campaign team",
     "summary": "A summer retail campaign that made the Georgian heat part of the joke.",
     "brief": "Promote Elit’s summer sale on air conditioners.",
@@ -360,12 +349,8 @@ function profileLinks() {
   return links.filter(Boolean).join(" · ");
 }
 
-function work(folder) {
-  const list = folder ? PROJECTS.filter(project => project.folder === folder) : PROJECTS;
-  const filters = [["", "All"], ...Object.entries(FOLDERS)].map(([key, label]) =>
-    `<a href="#work${key ? "-" + key : ""}"${key === folder ? ' aria-current="page"' : ""}>${label}</a>`
-  ).join("");
-  const tiles = list.map(project => `
+function work() {
+  const tiles = PROJECTS.map(project => `
     <a class="tile" href="#case-${project.id}">
       ${project.cover
         ? `<div class="art art-photo"><img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
@@ -376,7 +361,6 @@ function work(folder) {
   return `<section class="page in">
     <h1>Selected work</h1>
     <p class="intro">Brand campaigns, website copy, paid media and podcast growth.</p>
-    <nav class="filters" aria-label="Filter projects">${filters}</nav>
     <div class="grid">${tiles}</div>
   </section>`;
 }
@@ -392,7 +376,7 @@ function caseStudy(project) {
     `<img src="${escapeHtml(src)}" width="${width}" height="${height}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">`
   ).join("");
   return `<article class="page in">
-    <p><a href="#work-${project.folder}">← ${FOLDERS[project.folder]}</a></p>
+    <p><a href="#work">← Selected work</a></p>
     <h1>${escapeHtml(project.title)}</h1>
     ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
     <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
@@ -428,7 +412,6 @@ function about() {
 function route(moveFocus = false) {
   const hash = location.hash.slice(1);
   const project = PROJECTS.find(item => hash === "case-" + item.id);
-  const filter = hash.startsWith("work-") ? hash.slice(5) : "";
   let page = "home";
   let title = "Marketing Strategist";
   let markup = home;
@@ -440,7 +423,7 @@ function route(moveFocus = false) {
   } else if (hash === "work" || hash.startsWith("work-") || hash.startsWith("case-")) {
     page = "work";
     title = "Selected Work";
-    markup = work(Object.hasOwn(FOLDERS, filter) ? filter : "");
+    markup = work();
   } else if (hash === "about" || hash === "contact") {
     page = "about";
     title = "About";
