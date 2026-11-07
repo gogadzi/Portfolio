@@ -78,10 +78,10 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .bio li::marker{color:var(--acc)}
 :is(.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
 :is(.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
-.brands-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.brands-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .brand-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none}
 .brand-card:hover{border-color:var(--mute)}
-.brand-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.brand-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:var(--bg)}
 .brand-card h3{padding:14px;font-size:clamp(14px,1.7vw,20px);line-height:1.2}
 .about-projects{margin-top:32px}
 .about-projects h3{font-size:18px}
@@ -236,7 +236,6 @@ const PROJECTS = [
   },
   {
     "id": "gig",
-    "brand": "GIG",
     category: "Website copy",
     "title": "GIG — Potential in Action",
     "original": "პოტენციალი მოქმედებაში",
@@ -262,7 +261,6 @@ const PROJECTS = [
   },
   {
     "id": "sos-good-news",
-    "brand": "SOS Children’s Villages Georgia",
     category: "Website copy",
     "title": "SOS Children’s Villages Georgia — Good News",
     "original": "კარგი ამბები",
@@ -287,7 +285,6 @@ const PROJECTS = [
   },
   {
     "id": "aldagi-car-insurance",
-    "brand": "Aldagi",
     category: "Brand campaign",
     "title": "Aldagi — Don’t Be Afraid, Get Insured",
     "original": "ნუ გეშინია, დააზღვიე",
@@ -323,7 +320,6 @@ const PROJECTS = [
   },
   {
     "id": "evex-take-care",
-    "brand": "Evex",
     category: "Brand campaign",
     "title": "Evex — Take Care of Yourself",
     "original": "თავს მოუარე",
@@ -360,7 +356,6 @@ const PROJECTS = [
   },
   {
     "id": "cellfie-make-a-wish",
-    "brand": "Cellfie",
     category: "Brand campaign",
     "title": "Cellfie — Make a Wish",
     "original": "ისურვე და აგიხდება",
@@ -383,7 +378,6 @@ const PROJECTS = [
   },
   {
     "id": "elit-melting-season",
-    "brand": "Elit",
     category: "Brand campaign",
     "title": "Elit — Melting Season",
     "original": "დნობის სეზონი",
@@ -397,6 +391,13 @@ const PROJECTS = [
     "gallery": [],
     "results": []
   }
+];
+
+const BRANDS = [
+  ["Formula", "https://tv.formula.ge/", "https://formulanews.ge/uploads_script3/articles/2021/06/30/ijmyy781nsdky1k.jpg"],
+  ["Mindset", "#case-mindset-with-mindia", "https://yt3.googleusercontent.com/wW7kQdW2tJQnSgGNnPRA0s138UMHSxy3b5YWRR2x_dctDvpryKWBxqdX9iryO20BgQpsTXSp1Q=s900-c-k-c0x00ffffff-no-rj"],
+  ["Sasha Katsman", "#case-audio-course-campaigns", "https://media.stapilo.com/katsman/images/8cb0dd95-1da8-424b-bb0e-58fd52009343/original.jpg"],
+  ["Holy Motors", "https://holymotors.com/", "https://holymotors.com/images/holymotors-share.png"]
 ];
 
 const aboutProjects = PROJECTS.slice(0, 3);
@@ -476,10 +477,10 @@ function caseStudy(project, section) {
 }
 
 function about() {
-  const brands = workProjects.filter(project => project.brand && project.cover).map(project => `
-    <a class="brand-card" href="#case-${project.id}">
-      <img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async">
-      <h3>${escapeHtml(project.brand)}</h3>
+  const brands = BRANDS.map(([name, href, image]) => `
+    <a class="brand-card" href="${escapeHtml(href)}">
+      <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
+      <h3>${escapeHtml(name)}</h3>
     </a>`).join("");
   const featuredLinks = aboutProjects.map(project =>
     `<li><a href="#case-${project.id}">${escapeHtml(project.title)}</a></li>`
