@@ -7,7 +7,7 @@
 <meta name="description" content="Goga Dzidziguri, a marketing strategist with eight years of experience in paid media, social growth and copywriting. View selected work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;family=Outfit:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 :root{--bg:#FFFFFF;--ink:#1A1A1A;--mute:#767676;--line:#E8E8E8;--acc:#1A1A1A;--onacc:#FFFFFF;--card:#FAFAFA;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -56,8 +56,8 @@ body.home main .wrap{max-width:none;padding:0}
 .blurb{margin-left:62%;max-width:38ch;font:400 clamp(16px,1.3vw,20px)/1.55 "DM Sans",sans-serif}
 .blurb p{margin:0}
 .blurb p + p{color:var(--mute)}
-.blurb .role{font-size:clamp(18px,2.2vw,30px);font-weight:700;margin-bottom:12px}
-.landing h1{font:500 clamp(48px,9vw,160px)/.95 Outfit,sans-serif;letter-spacing:-.045em;margin-top:3vh}
+.blurb .role{font-size:clamp(13px,1.1vw,16px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.landing h1{font-size:clamp(48px,9vw,160px);font-weight:800;line-height:.95;letter-spacing:-.055em;margin-top:3vh}
 .in{animation:in .5s ease both}
 @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -121,7 +121,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
   </div>
   <noscript><p class="wrap">Enable JavaScript to browse the work and about pages.</p></noscript>
 </main>
-<footer><div class="wrap"><span>© 2026 Goga Dzidziguri</span><span id="footer-links" hidden></span></div></footer>
+<footer hidden><div class="wrap" id="footer-links"></div></footer>
 <script>
 // Fill in these details when they are ready. Empty values stay hidden.
 const PROFILE = { email: "", linkedin: "", resume: "" };
@@ -442,7 +442,7 @@ function route(moveFocus = false) {
 const links = profileLinks();
 if (links) {
   $("#footer-links").innerHTML = links;
-  $("#footer-links").hidden = false;
+  $("footer").hidden = false;
 }
 $(".skip").addEventListener("click", event => {
   event.preventDefault();
