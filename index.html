@@ -13,6 +13,7 @@
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--card:#1C1B3A;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#14132B;--ink:#ECEBF5;--mute:#A3A2C8;--line:#2E2D55;--acc:#8C8CFF;--onacc:#14132B;--card:#1C1B3A;color-scheme:dark}
+:root:has(body.home){--bg:#000;--ink:#F5F5F5;--mute:#B3B3B3;--line:#292929;--acc:#FFF3A0;--onacc:#000;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
@@ -47,15 +48,14 @@ main{min-height:70vh;padding:56px 0 96px}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
 footer .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 32px}
 body.home::before{display:none}
-body.home header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;background:transparent;border-bottom:0;color:#fff}
-body.home header a{color:#fff}
+body.home header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;background:transparent;border-bottom:0}
 body.home main{padding:0;min-height:0}
 body.home main .wrap{max-width:none;padding:0}
-.landing{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw 9vh;color:#FFF3A0;overflow:hidden;background:radial-gradient(ellipse 45% 30% at 62% 26%,#0E1013 0%,rgba(14,16,19,0) 100%),radial-gradient(ellipse 70% 50% at 55% 62%,rgba(86,118,155,.7) 0%,rgba(86,118,155,0) 100%),linear-gradient(180deg,#15181D 0%,#1E2A3A 45%,#46627F 100%)}
-.landing.bg-teal{background:radial-gradient(circle at 76% 36%,transparent 15vw,rgba(125,225,200,.28) 15.6vw,transparent 26vw),radial-gradient(ellipse 60% 45% at 76% 36%,rgba(6,18,17,.85) 0%,rgba(6,18,17,0) 100%),linear-gradient(180deg,#081715 0%,#12423E 55%,#2C7A70 100%)}
+.landing{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 5vw 9vh;overflow:hidden;background:radial-gradient(ellipse at 76% 42%,#202020 0%,var(--bg) 68%)}
 .landing>*{position:relative;z-index:1}
 .blurb{margin-left:62%;max-width:38ch;font:400 clamp(16px,1.3vw,20px)/1.55 "DM Sans",sans-serif}
 .blurb p{margin:0}
+.blurb p + p{color:var(--mute)}
 .blurb .role{font-size:clamp(18px,2.2vw,30px);font-weight:700;margin-bottom:12px}
 .landing h1{font:500 clamp(48px,9vw,160px)/.95 Outfit,sans-serif;letter-spacing:-.045em;margin-top:3vh}
 .in{animation:in .5s ease both}
@@ -65,10 +65,8 @@ body.home main .wrap{max-width:none;padding:0}
 nav a{font:500 16px "DM Sans",system-ui,sans-serif;text-decoration:none;padding:8px 0}
 nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:6px}
 .bar{gap:16px}
-body.home header :focus-visible,.landing :focus-visible{outline-color:#FFF3A0}
 .landing{padding-bottom:max(7vh,calc(env(safe-area-inset-bottom,0px) + 24px))}
 .landing-cta{margin-top:22px}
-.landing-cta .btn{background:#FFF3A0;color:#102E2B}
 .page h1{font-size:clamp(32px,6vw,64px);margin:0 0 22px;line-height:1.06}
 .page .intro,.bio{max-width:64ch}
 .intro{color:var(--mute);margin:0 0 30px}
@@ -114,7 +112,7 @@ body.home header :focus-visible,.landing :focus-visible{outline-color:#FFF3A0}
 </header>
 <main id="main" tabindex="-1">
   <div class="wrap" id="view">
-    <section class="landing bg-teal">
+    <section class="landing">
       <div class="blurb">
         <p class="role">Marketing strategist</p>
         <p>Eight years in marketing, focused on paid media, social growth and copywriting.</p>
