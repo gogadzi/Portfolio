@@ -164,7 +164,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .project-video-dialog header{position:static;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:0;border:0}
 .project-video-dialog button{min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
 .project-video-dialog button:hover{border-color:var(--acc)}
-.project-video-dialog .case-video{width:min(100%,calc(136dvh - 150px));margin-inline:auto;aspect-ratio:1472/1080;object-fit:contain}
+.project-video-dialog .case-video{width:min(100%,calc(136dvh - 150px));margin-inline:auto;aspect-ratio:var(--project-video-ratio,16/9);object-fit:contain}
 .project-video-dialog a{display:inline-block;margin-top:8px;color:var(--mute);font-size:14px;text-underline-offset:4px}
 .project-media{display:grid;gap:18px}
 .gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
@@ -441,11 +441,22 @@ const PROJECTS = [
     brief: "A collection of short-form videos made for social media.",
     work: "The three clips below give a first look at the project. More context and credits will be added soon.",
     youtubeVideos: ["WIEZfzIKRls", "Vci2zKy0iEQ", "jnq6_FJxgMA"],
+    videoAspectRatio: "1472/1080",
     videoThumbnails: [
       "assets/projects/2-nabiji-preview-1.svg",
       "assets/projects/2-nabiji-preview-2.svg",
       "assets/projects/2-nabiji-preview-3.svg"
     ],
+    showProjectLinks: false,
+    results: []
+  },
+  {
+    id: "liberty-bank",
+    title: "Liberty Bank",
+    category: "Brand campaign",
+    art: "Liberty Bank",
+    summary: "Three campaign videos for Liberty Bank.",
+    youtubeVideos: ["O2M_55pQovA", "nZq4WhBPjFA", "IFz6scbHtHc"],
     showProjectLinks: false,
     results: []
   }
@@ -504,19 +515,20 @@ function projectVideoGallery(project) {
   const previews = project.youtubeVideos.map((id, index) => {
     const label = `${project.title} video ${index + 1}`;
     const source = project.videos?.[index];
+    const thumbnail = project.videoThumbnails?.[index];
     const player = source
       ? `<video class="case-video" src="${escapeHtml(source)}" aria-label="${escapeHtml(label)}" controls playsinline preload="metadata"></video>`
       : `${caseVideo(`https://www.youtube.com/embed/${id}`, label)}
         <a href="https://www.youtube.com/watch?v=${id}">Watch on YouTube</a>`;
     return `<button class="project-video-preview" type="button" aria-label="Enlarge ${escapeHtml(label)}" aria-haspopup="dialog" data-video-preview>
-      <img src="${escapeHtml(project.videoThumbnails[index])}" alt="" width="960" height="704" loading="lazy" decoding="async">
+      <img src="${escapeHtml(thumbnail ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`)}" alt="" width="${thumbnail ? 960 : 480}" height="${thumbnail ? 704 : 360}" loading="lazy" decoding="async">
       <span aria-hidden="true">⤢</span>
     </button><template>${player}</template>`;
   }).join("");
   return `<section class="case-section">
     <h2>Project videos</h2>
     <div class="project-videos">${previews}</div>
-    <dialog class="project-video-dialog" aria-labelledby="project-video-title">
+    <dialog class="project-video-dialog" aria-labelledby="project-video-title"${project.videoAspectRatio ? ` style="--project-video-ratio:${escapeHtml(project.videoAspectRatio)}"` : ""}>
       <header>
         <h2 id="project-video-title"></h2>
         <form method="dialog"><button type="submit" autofocus>Close</button></form>
@@ -545,13 +557,13 @@ function caseStudy(project, section) {
       <h1>${escapeHtml(project.title)}</h1>
       ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
       <p class="case-summary">${escapeHtml(project.summary)}</p>
-      <p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>
+      ${project.role ? `<p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>` : ""}
     </div>
     ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
     ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile))}</div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
-    <section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
-    <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
+    ${project.brief ? `<section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>` : ""}
+    ${project.work ? `<section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>` : ""}
     ${project.youtubeVideos ? projectVideoGallery(project) : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
       <h2>${leadVideo ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
