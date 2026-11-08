@@ -152,6 +152,8 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card);border-radius:4px}
 .case-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:4px;background:var(--card)}
 .case-video--portrait{width:min(100%,420px);width:min(100%,420px,48svh);aspect-ratio:9/16}
+.project-reel .case-video--portrait{width:100%;max-width:420px}
+.project-reel a{display:inline-block;margin-top:10px;color:var(--mute);font-size:14px;text-underline-offset:4px}
 .project-media{display:grid;gap:18px}
 .gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
 .gallery-swipe{display:none}
@@ -410,6 +412,19 @@ const PROJECTS = [
     "showProjectLinks": false,
     "gallery": [],
     "results": []
+  },
+  {
+    id: "2-nabiji",
+    title: "2 Nabiji",
+    category: "Brand campaign",
+    art: "2 Nabiji",
+    role: "Project details coming soon",
+    summary: "Three short videos for 2 Nabiji.",
+    brief: "A collection of short-form videos made for social media.",
+    work: "The three clips below give a first look at the project. More context and credits will be added soon.",
+    reels: ["25445294898437100", "1188822539401764", "1931890427758749"],
+    showProjectLinks: false,
+    results: []
   }
 ];
 
@@ -486,6 +501,19 @@ function caseStudy(project, section) {
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     <section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
+    ${project.reels ? `<section class="case-section">
+      <h2>Project videos</h2>
+      <div class="grid">
+        ${project.reels.map((id, index) => {
+          const reelUrl = `https://www.facebook.com/reel/${id}/`;
+          const embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(reelUrl)}&show_text=0&width=560`;
+          return `<div class="project-reel">
+            ${caseVideo(embedUrl, `${project.title} video ${index + 1}`, true)}
+            <a href="${reelUrl}">Watch video ${index + 1} on Facebook</a>
+          </div>`;
+        }).join("")}
+      </div>
+    </section>` : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
       <h2>${project.videoEmbed ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
       ${caseVideo(project.closingVideoEmbed, project.title + (project.videoEmbed ? " video 2" : " project video"), project.portraitVideo)}
