@@ -165,6 +165,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .project-video-dialog button{min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
 .project-video-dialog button:hover{border-color:var(--acc)}
 .project-video-dialog .case-video{width:min(100%,calc(136dvh - 150px));margin-inline:auto;aspect-ratio:var(--project-video-ratio,16/9);object-fit:contain}
+.project-video-dialog video.case-video{aspect-ratio:auto var(--project-video-ratio,16/9)}
 .project-video-dialog a{display:inline-block;margin-top:8px;color:var(--mute);font-size:14px;text-underline-offset:4px}
 .project-media{display:grid;gap:18px}
 .gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
@@ -458,6 +459,7 @@ const PROJECTS = [
     art: "Liberty Bank",
     summary: "Three campaign videos for Liberty Bank.",
     youtubeVideos: ["O2M_55pQovA", "nZq4WhBPjFA", "IFz6scbHtHc"],
+    videos: ["assets/videos/liberty-bank-1.mp4", "assets/videos/liberty-bank-2.mp4", "assets/videos/liberty-bank-3.mp4"],
     showProjectLinks: false,
     results: []
   }
