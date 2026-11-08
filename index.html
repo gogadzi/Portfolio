@@ -434,6 +434,11 @@ const PROJECTS = [
     brief: "A collection of short-form videos made for social media.",
     work: "The three clips below give a first look at the project. More context and credits will be added soon.",
     youtubeVideos: ["WIEZfzIKRls", "Vci2zKy0iEQ", "jnq6_FJxgMA"],
+    videoThumbnails: [
+      "assets/projects/2-nabiji-preview-1.svg",
+      "assets/projects/2-nabiji-preview-2.svg",
+      "assets/projects/2-nabiji-preview-3.svg"
+    ],
     showProjectLinks: false,
     results: []
   }
@@ -496,7 +501,7 @@ function projectVideoGallery(project) {
       : `${caseVideo(`https://www.youtube.com/embed/${id}`, label)}
         <a href="https://www.youtube.com/watch?v=${id}">Watch on YouTube</a>`;
     return `<button class="project-video-preview" type="button" aria-label="Enlarge ${escapeHtml(label)}" aria-haspopup="dialog" data-video-preview>
-      <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+      <img src="${escapeHtml(project.videoThumbnails[index])}" alt="" width="960" height="704" loading="lazy" decoding="async">
       <span aria-hidden="true">⤢</span>
     </button><template>${player}</template>`;
   }).join("");
