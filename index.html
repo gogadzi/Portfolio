@@ -422,7 +422,7 @@ const PROJECTS = [
     summary: "Three short videos for 2 Nabiji.",
     brief: "A collection of short-form videos made for social media.",
     work: "The three clips below give a first look at the project. More context and credits will be added soon.",
-    reels: ["25445294898437100", "1188822539401764", "1931890427758749"],
+    youtubeVideos: ["WIEZfzIKRls", "Vci2zKy0iEQ", "jnq6_FJxgMA"],
     showProjectLinks: false,
     results: []
   }
@@ -501,15 +501,15 @@ function caseStudy(project, section) {
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     <section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>
     <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
-    ${project.reels ? `<section class="case-section">
+    ${project.youtubeVideos ? `<section class="case-section">
       <h2>Project videos</h2>
       <div class="grid">
-        ${project.reels.map((id, index) => {
-          const reelUrl = `https://www.facebook.com/reel/${id}/`;
-          const embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(reelUrl)}&show_text=0&width=560`;
+        ${project.youtubeVideos.map((id, index) => {
+          const watchUrl = `https://www.youtube.com/watch?v=${id}`;
+          const embedUrl = `https://www.youtube.com/embed/${id}`;
           return `<div class="project-reel">
             ${caseVideo(embedUrl, `${project.title} video ${index + 1}`, true)}
-            <a href="${reelUrl}">Watch video ${index + 1} on Facebook</a>
+            <a href="${watchUrl}">Watch video ${index + 1} on YouTube</a>
           </div>`;
         }).join("")}
       </div>
