@@ -429,6 +429,7 @@ const PROJECTS = [
     title: "2 Nabiji",
     category: "Brand campaign",
     art: "2 Nabiji",
+    thumbnail: "assets/projects/2-nabiji-cover.svg",
     role: "Project details coming soon",
     summary: "Three short videos for 2 Nabiji.",
     brief: "A collection of short-form videos made for social media.",
@@ -464,8 +465,8 @@ const escapeHtml = value => String(value).replace(/[&<>"]/g, char => ({
 function projectTiles(projects) {
   return projects.map((project, index) => `
     <a class="tile" href="#case-${project.id}" style="--card-index:${index}">
-      ${project.cover
-        ? `<div class="art art-photo"><img src="${escapeHtml(project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
+      ${project.thumbnail || project.cover
+        ? `<div class="art art-photo"><img src="${escapeHtml(project.thumbnail || project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
         : `<div class="art" aria-hidden="true">${escapeHtml(project.art)}</div>`}
       <p class="tile-category">${escapeHtml(project.category)}</p>
       <h2>${escapeHtml(project.title)}</h2>
