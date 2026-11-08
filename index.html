@@ -152,7 +152,8 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card);border-radius:4px}
 .case-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:4px;background:var(--card)}
 .case-video--portrait{width:min(100%,420px);width:min(100%,420px,48svh);aspect-ratio:9/16}
-.project-reel .case-video--portrait{width:100%;max-width:420px}
+.project-videos{display:grid;gap:18px}
+.project-videos .case-video{aspect-ratio:1472/1080}
 .project-reel a{display:inline-block;margin-top:10px;color:var(--mute);font-size:14px;text-underline-offset:4px}
 .project-media{display:grid;gap:18px}
 .gallery-note{margin:-8px 0 16px;color:var(--mute);font-size:15px}
@@ -503,12 +504,12 @@ function caseStudy(project, section) {
     <section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>
     ${project.youtubeVideos ? `<section class="case-section">
       <h2>Project videos</h2>
-      <div class="grid">
+      <div class="project-videos">
         ${project.youtubeVideos.map((id, index) => {
           const watchUrl = `https://www.youtube.com/watch?v=${id}`;
           const embedUrl = `https://www.youtube.com/embed/${id}`;
           return `<div class="project-reel">
-            ${caseVideo(embedUrl, `${project.title} video ${index + 1}`, true)}
+            ${caseVideo(embedUrl, `${project.title} video ${index + 1}`)}
             <a href="${watchUrl}">Watch video ${index + 1} on YouTube</a>
           </div>`;
         }).join("")}
