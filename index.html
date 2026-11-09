@@ -662,7 +662,7 @@ function brandPage([, name, href, image, description, linkLabel, details]) {
             ${details.story.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </section>
           <section aria-labelledby="brand-impact">
-            <h2 id="brand-impact">My Role &amp; Impact</h2>
+            <h2 id="brand-impact">What I Did</h2>
             <ul>${details.impact.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
           </section>` : `<p>${escapeHtml(description)}</p>`}
         <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
