@@ -89,6 +89,12 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 :is(.education,.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
 :is(.education,.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
 .education p{max-width:64ch}
+.about-page{font-size:15px}
+.about-page h1{font-size:clamp(28px,4.6vw,48px)}
+.about-page :is(.education,.brands,.contact) > h2{font-size:clamp(20px,3vw,28px)}
+.about-page .brand-name{font-size:clamp(12px,1.4vw,16px)}
+.about-page .btn{font-size:14px}
+.about-page .copy-status{font-size:13px}
 .brands-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:20px}
 .brand-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none}
 .brand-card:hover{border-color:var(--mute)}
@@ -584,9 +590,9 @@ function about() {
       <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
       <span class="brand-name">${escapeHtml(name)}<span aria-hidden="true">↗</span></span>
     </a>`).join("");
-  return `<section class="page in">
+  return `<section class="page about-page in">
     <div class="bio">
-      <h1>So, Who Am I?</h1>
+      <h1>Who Am I</h1>
       <p>Hi, I'm Goga Dzidziguri, a creative mind with a thing for marketing, based in Georgia.</p>
       <p>I come up with creative campaigns, write stuff for brands, build marketing strategies and do a bit of everything in digital marketing. Basically, I bring ideas to life by working with the right people.</p>
       <p>Over the past 8 years, I've worked in television, at a creative agency and independently with brands of different sizes. My experience covers both the creative and business sides of marketing.</p>
@@ -595,7 +601,7 @@ function about() {
       <h2 id="education-title">Education</h2>
       <p><strong>BA in Visual Communications</strong></p>
       <p>Georgian Institute of Public Affairs (GIPA)<br>2019–2024</p>
-      <p>Studied visual communications with a focus on creative thinking, storytelling, and practical work in advertising and marketing.</p>
+      <p>Studied visual communications with a focus on creative thinking, storytelling and practical work in advertising and marketing.</p>
     </section>
     <section id="brands" class="brands" tabindex="-1" aria-labelledby="brands-title">
       <h2 id="brands-title">Brands</h2>
