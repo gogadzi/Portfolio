@@ -85,7 +85,6 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .page h1{font-size:clamp(32px,6vw,64px);margin:0 0 22px;line-height:1.06}
 .page .intro,.bio{max-width:64ch}
 .intro{color:var(--mute);margin:0 0 30px}
-.featured-link{color:var(--acc);text-underline-offset:4px}
 .page :is(a,button){overflow-wrap:anywhere}
 :is(.education,.brands,.contact){margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
 :is(.education,.brands,.contact) > h2{font-size:clamp(24px,4vw,36px);margin-bottom:20px}
@@ -102,11 +101,7 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 @media (max-width:640px){
   .brand-page-content{grid-template-columns:minmax(0,1fr)}
 }
-.about-projects{margin-top:32px}
-.about-projects h3{font-size:18px}
-.about-projects ul{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:0;list-style:none}
-.about-projects a{text-underline-offset:4px}
-.brands,.about-projects,.contact{scroll-margin-top:80px}
+.brands,.contact{scroll-margin-top:80px}
 @media (max-width:640px){
   .brands-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 }
@@ -497,7 +492,7 @@ function work() {
   const categories = [...new Set(workProjects.map(project => project.category))];
   return `<section class="page in">
     <h1>Projects</h1>
-    <p class="intro">Brand campaigns, website copy, and creative projects. <a class="featured-link" href="#about-projects">See paid media and podcast projects</a>.</p>
+    <p class="intro">Brand campaigns, website copy, and creative projects.</p>
     <div class="project-filters" role="group" aria-label="Filter projects by category">
       <button class="project-filter" type="button" data-project-filter="" aria-pressed="true" aria-controls="project-grid">All projects</button>
       ${categories.map(category => `<button class="project-filter" type="button" data-project-filter="${escapeHtml(category)}" aria-pressed="false" aria-controls="project-grid">${escapeHtml(category)}</button>`).join("")}
@@ -589,9 +584,6 @@ function about() {
       <img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" decoding="async">
       <span class="brand-name">${escapeHtml(name)}<span aria-hidden="true">↗</span></span>
     </a>`).join("");
-  const featuredLinks = aboutProjects.map(project =>
-    `<li><a href="#case-${project.id}">${escapeHtml(project.title)}</a></li>`
-  ).join("");
   return `<section class="page in">
     <div class="bio">
       <h1>So, Who Am I?</h1>
@@ -609,10 +601,6 @@ function about() {
       <h2 id="brands-title">Brands</h2>
       <p class="intro">A selection of brands and organizations I’ve worked with.</p>
       <div class="grid brands-grid">${brands}</div>
-      <section id="about-projects" class="about-projects" tabindex="-1" aria-labelledby="about-projects-title">
-        <h3 id="about-projects-title">Paid media &amp; podcasts</h3>
-        <ul>${featuredLinks}</ul>
-      </section>
     </section>
     <div class="next"><a class="btn" href="#work">View projects</a></div>
     <section id="contact" class="contact" tabindex="-1" aria-labelledby="contact-title">
@@ -649,10 +637,10 @@ function brandPage([, name, href, image, description, linkLabel]) {
 }
 
 function route(moveFocus = false) {
-  const hash = location.hash.slice(1);
+  const hash = location.hash === "#about-projects" ? "brands" : location.hash.slice(1);
   const project = PROJECTS.find(item => hash === "case-" + item.id);
   const brand = BRANDS.find(([id]) => hash === "brand-" + id);
-  const aboutAnchor = ["brands", "about-projects", "contact"].includes(hash);
+  const aboutAnchor = ["brands", "contact"].includes(hash);
   let page = "home";
   let title = "Creative & Marketing Strategist";
   let markup = home;
