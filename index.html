@@ -104,11 +104,10 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .brand-page-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:clamp(20px,4vw,48px);max-width:960px}
 .brand-page-image{border:1px solid var(--line);border-radius:4px}
 .brand-page-description p{margin:0 0 20px;max-width:55ch}
-.brand-page--story h1{font-size:clamp(28px,4.6vw,48px)}
 .brand-page--story .brand-page-content{grid-template-columns:minmax(0,2fr) minmax(0,1fr);font-size:15px}
 .brand-page--story .brand-page-description{order:-1}
 .brand-page--story .brand-page-image{aspect-ratio:1;object-fit:cover;max-width:320px}
-.brand-page-description h2{font-size:clamp(18px,2.4vw,24px);margin:0 0 16px}
+.brand-page-description :is(h1,h2){font-size:clamp(18px,2.4vw,24px);margin:0 0 16px}
 .brand-page-description ul{margin:0 0 24px;padding-left:20px;max-width:55ch}
 .brand-page-description li+li{margin-top:8px}
 @media (max-width:640px){
@@ -652,17 +651,17 @@ function about() {
 function brandPage([, name, href, image, description, linkLabel, details]) {
   return `<article class="page in${details ? " brand-page--story" : ""}">
     <a class="back-link" href="#brands"><span aria-hidden="true">←</span> Back to Brands</a>
-    <h1>${escapeHtml(name)}</h1>
+    ${details ? "" : `<h1>${escapeHtml(name)}</h1>`}
     <div class="brand-page-content">
       <img class="brand-page-image" src="${escapeHtml(image)}" alt="" width="400" height="${details ? 400 : 300}" decoding="async">
       <div class="brand-page-description">
         ${details ? `
           <section aria-labelledby="brand-story">
-            <h2 id="brand-story">The Story</h2>
+            <h1 id="brand-story">The Story</h1>
             ${details.story.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </section>
           <section aria-labelledby="brand-impact">
-            <h2 id="brand-impact">What I Did</h2>
+            <h2 id="brand-impact">Key Contributions</h2>
             <ul>${details.impact.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
           </section>` : `<p>${escapeHtml(description)}</p>`}
         <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
