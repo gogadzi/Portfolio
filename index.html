@@ -158,6 +158,8 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .case-section{padding-block:var(--case-space);border-top:1px solid var(--line)}
 .case-section h2{font-size:clamp(20px,2.2vw,24px);line-height:1.15}
 .case-section:not(.cols) h2{margin:0 0 18px}
+.case-about p{max-width:62ch}
+.case-about p:last-child{margin-bottom:0}
 .case-study .next{margin-top:0;padding-bottom:0}
 .case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card);border-radius:4px}
 .case-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:4px;background:var(--card)}
@@ -268,10 +270,11 @@ const PROJECTS = [
     category: "Personal project",
     "title": "Megreels",
     "original": "იბჩუათ მარგალურო!",
-    "role": "Creator · Personal project",
     "summary": "A short-form video project about the Megrelian language.",
-    "brief": "Celebrate the Megrelian language and encourage more people to hear and speak it as its use declines, including in Samegrelo.",
-    "work": "I started Megreels for an undergraduate assignment at GIPA and used short-form videos to share what makes the language distinctive.",
+    about: `
+      <p>In western Georgia, there's a region called Samegrelo, where people speak Megrelian, a unique language that UNESCO lists as endangered. Sadly, fewer and fewer people speak it, even in Samegrelo itself.</p>
+      <p>One of the fascinating things about Megrelian is that it has single-letter words with their own independent meanings. Yes, an entire word made up of just one letter.</p>
+      <p>Being Megrelian myself, I wanted to share this little-known side of the language. So, for my bachelor's project at GIPA, I created <strong>Megreels</strong> - a personal project dedicated to showing just how unique Megrelian is and bringing it to more people's attention.</p>`,
     "cover": "assets/projects/megreels-cover.webp",
     videoFile: "assets/videos/megreels.mp4",
     "closingVideoEmbed": "https://www-ccv.adobe.io/v1/player/ccv/3Ck3fRzKCqy/embed?api_key=behance1&bgcolor=%23191919",
@@ -613,10 +616,11 @@ function caseStudy(project, section) {
       <p class="case-category">${escapeHtml(project.category)}</p>
       <h1>${escapeHtml(project.title)}</h1>
       ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
-      <p class="case-summary">${escapeHtml(project.summary)}</p>
+      ${project.about ? "" : `<p class="case-summary">${escapeHtml(project.summary)}</p>`}
       ${project.role ? `<p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>` : ""}
     </div>
     ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
+    ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
     ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile))}</div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     ${project.brief ? `<section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>` : ""}
