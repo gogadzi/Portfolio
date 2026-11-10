@@ -477,10 +477,17 @@ const PROJECTS = [
 const BRANDS = [
   ["mindset", "Mindset", "#case-mindset-with-mindia", "assets/brands/mindset.png", "A Georgian-language podcast about psychology and personal growth, hosted by Mindia.", "View Mindset case study"],
   ["sasha-katsman", "Katsman", "#case-audio-course-campaigns", "assets/brands/sasha-katsman.jpg", "An entrepreneur, mentor, and speaker who offers courses and consultations on personal and professional development.", "View Katsman case study"],
-  ["holy-motors", "Holy Motors", "https://holymotors.com/", "assets/brands/holy-motors.jpg", [
-    "Holy Motors is one of Georgia's standout creative agencies, founded by two of my university lecturers, with a holistic approach to building brands from scratch.",
-    "I joined the team right after graduation and spent almost two years there as a copywriter and part of the creative team. I worked on all kinds of projects, came up with ideas, wrote a lot, and picked up some pretty useful skills along the way."
-  ], "Visit Holy Motors"],
+  ["holy-motors", "Holy Motors", "https://holymotors.com/", "assets/brands/holy-motors.jpg", null, "Visit Holy Motors", {
+    story: [
+      "Holy Motors is one of Georgia's standout creative agencies, founded by two of my university lecturers, with a holistic approach to building brands from scratch.",
+      "I joined the team right after graduation and spent almost two years there as a copywriter and part of the creative team. I worked on all kinds of projects, came up with ideas, wrote a lot and picked up some pretty useful skills along the way."
+    ],
+    impact: [
+      "Worked with creative directors, designers and strategists to develop campaign ideas and concepts.",
+      "Wrote creative copy for advertising campaigns, websites, print materials and social media.",
+      "Adapted copy to different brand voices, keeping communication consistent across channels."
+    ]
+  }],
   ["formula", "Formula TV", "https://www.facebook.com/TVFormula", "assets/brands/formula.jpg", "An independent Georgian broadcaster covering news and current affairs on television and online.", "Visit Formula TV", {
     story: [
       "Formula is one of the few remaining opposition media outlets in Georgia and I was part of its digital team from day one.",
@@ -666,7 +673,7 @@ function brandPage([, name, href, image, description, linkLabel, details]) {
           <section aria-labelledby="brand-impact">
             <h2 id="brand-impact">Key Contributions</h2>
             <ul>${details.impact.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-          </section>` : [description].flat().map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+          </section>` : `<p>${escapeHtml(description)}</p>`}
         <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
       </div>
     </div>
