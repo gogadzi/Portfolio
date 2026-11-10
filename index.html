@@ -485,6 +485,7 @@ const PROJECTS = [
     ],
     "cover": "assets/projects/elit-melting-season-cover.webp",
     "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FElitElectronics%2Fvideos%2F578379208635568%2F&show_text=0&width=560",
+    makingOfVideo: "assets/videos/elit-making-of.mp4",
     "showProjectLinks": false,
     "gallery": [],
     "results": []
@@ -695,6 +696,10 @@ function caseStudy(project, section) {
       ${Array.isArray(project.work)
         ? `<ul>${project.work.map(item => `<li>${formatCaseCopy(item)}</li>`).join("")}</ul>`
         : `<p>${formatCaseCopy(project.work)}</p>`}
+    </section>` : ""}
+    ${project.makingOfVideo ? `<section class="case-section">
+      <h2>Making Of</h2>
+      ${caseVideo(project.makingOfVideo, project.title + " Making Of", false, true)}
     </section>` : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
       <h2>${leadVideo ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
