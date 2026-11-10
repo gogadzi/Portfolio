@@ -402,8 +402,16 @@ const PROJECTS = [
     "original": "თავს მოუარე",
     "role": "Campaign team",
     "summary": "A short film and a site with 1,001 reasons to take care of yourself.",
-    "brief": "Bring Evex’s refreshed strategy to life through the everyday reasons people want to live longer.",
-    "work": "Our team made a short film and created a platform collecting 1,001 reasons to take care of yourself.",
+    "brief": [
+      "At Holy Motors, we worked on a new brand strategy and campaign for Evex, one of Georgia's leading healthcare providers.",
+      "The campaign, **\"Take Care of Yourself,\"** was built around a simple idea: there are countless reasons to live a long life, both big and small. And every single one of them is a good reason to start taking better care of yourself.",
+      "We brought this idea to life through a short film and a dedicated digital platform featuring **1,001 reasons to live longer**, reminding people that even the smallest things in life are worth sticking around for."
+    ],
+    "work": [
+      "Contributed to the campaign's creative concept and messaging.",
+      "Worked on creative copy and storytelling for the campaign.",
+      "Personally wrote all 1,001 reasons to live longer for the campaign's digital platform. **No AI involved.**"
+    ],
     "cover": "assets/projects/evex-take-care-cover.webp",
     "gallery": [
       [
@@ -470,8 +478,16 @@ const PROJECTS = [
     "original": "დნობის სეზონი",
     "role": "Campaign team",
     "summary": "A summer retail campaign that made the Georgian heat part of the joke.",
-    "brief": "Promote Elit’s summer sale on air conditioners.",
-    "work": "We took the idea that everything melts in the Georgian summer and used it to announce Elit’s price drops on air conditioners.",
+    "brief": [
+      "Summers in Georgia can get ridiculously hot. So hot that sometimes it feels like everything around you is melting. Including you.",
+      "At Holy Motors, we took that idea and turned it into a summer campaign for Elit, one of Georgia's electronics retailers.",
+      "The concept was simple: if everything is melting in the summer heat, why shouldn't prices melt too? That's how we came up with **\"The Great Summer Price Melt,\"** a campaign announcing big discounts on air conditioners."
+    ],
+    "work": [
+      "Came up with the original creative concept for the campaign.",
+      "Developed the idea and its messaging with the creative team.",
+      "Was involved throughout the entire process, from the initial concept to the final execution."
+    ],
     "cover": "assets/projects/elit-melting-season-cover.webp",
     "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FElitElectronics%2Fvideos%2F578379208635568%2F&show_text=0&width=560",
     "showProjectLinks": false,
@@ -632,6 +648,8 @@ function projectVideoGallery(project) {
   </section>`;
 }
 
+const formatCaseCopy = value => escapeHtml(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
 function caseStudy(project, section) {
   const backLabel = section === "about" ? "About" : "Projects";
   const leadVideo = project.videoFile ?? project.videoEmbed;
@@ -659,13 +677,13 @@ function caseStudy(project, section) {
     ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
     ${project.brief ? `<section class="case-section cols">
       <h2>The goal</h2>
-      <div>${[project.brief].flat().map(paragraph => `<p>${escapeHtml(paragraph).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}</p>`).join("")}</div>
+      <div>${[project.brief].flat().map(paragraph => `<p>${formatCaseCopy(paragraph)}</p>`).join("")}</div>
     </section>` : ""}
     ${project.work ? `<section class="case-section cols">
       <h2>What I worked on</h2>
       ${Array.isArray(project.work)
-        ? `<ul>${project.work.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
-        : `<p>${escapeHtml(project.work)}</p>`}
+        ? `<ul>${project.work.map(item => `<li>${formatCaseCopy(item)}</li>`).join("")}</ul>`
+        : `<p>${formatCaseCopy(project.work)}</p>`}
     </section>` : ""}
     ${project.youtubeVideos ? projectVideoGallery(project) : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
