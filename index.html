@@ -533,6 +533,7 @@ const PROJECTS = [
     "cover": "assets/projects/megreels-cover.webp",
     videoFile: "assets/videos/megreels.mp4",
     videoPoster: "assets/projects/megreels-video-poster.jpg",
+    closingVideoHeading: "Making Of",
     "closingVideoEmbed": "https://www-ccv.adobe.io/v1/player/ccv/3Ck3fRzKCqy/embed?api_key=behance1&bgcolor=%23191919",
     "portraitVideo": true,
     "link": ["Megreels on Instagram", "https://www.instagram.com/megreels_/"],
@@ -700,7 +701,7 @@ function caseStudy(project, section) {
       ${caseVideo(project.makingOfVideo, project.title + " Making Of", false, true)}
     </section>` : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
-      <h2>${leadVideo ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
+      <h2>${escapeHtml(project.closingVideoHeading ?? (leadVideo ? `More from ${project.title}` : "Project video"))}</h2>
       ${caseVideo(project.closingVideoEmbed, project.title + (leadVideo ? " video 2" : " project video"), project.portraitVideo)}
     </section>` : ""}
     ${gallery ? `<section class="case-section project-gallery">
