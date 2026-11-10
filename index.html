@@ -320,6 +320,7 @@ const PROJECTS = [
     "id": "sos-good-news",
     category: "Website copy",
     "title": "SOS Children’s Villages Georgia — Good News",
+    cardTitle: "SOS Children’s Villages Georgia",
     "role": "Website copy · Holy Motors",
     "summary": "Website copy for a nonprofit supporting children and families in Georgia.",
     brief: [
@@ -492,6 +493,7 @@ const PROJECTS = [
     category: "Brand campaign",
     art: "2 Nabiji",
     thumbnail: "assets/projects/2-nabiji-cover.svg",
+    cardTitle: "2 Nabiji — Don’t Save on Gifts",
     summary: "Three short videos for 2 Nabiji.",
     brief: [
       "2 Nabiji is one of Georgia's most affordable supermarket chains and that gave us an idea for its Christmas campaign at Holy Motors.",
@@ -520,6 +522,7 @@ const PROJECTS = [
     title: "Liberty Bank",
     category: "Brand campaign",
     art: "Liberty Bank",
+    cardTitle: "Liberty Bank — Change Your Summer",
     summary: "Three campaign videos for Liberty Bank.",
     brief: [
       "Liberty Bank is one of the largest banks in Georgia and at Holy Motors, we worked on a summer campaign to promote its loan products.",
@@ -606,7 +609,7 @@ function projectTiles(projects) {
         ? `<div class="art art-photo"><img src="${escapeHtml(project.thumbnail || project.cover)}" alt="" width="720" height="563" loading="lazy" decoding="async"></div>`
         : `<div class="art" aria-hidden="true">${escapeHtml(project.art)}</div>`}
       <p class="tile-category">${escapeHtml(project.category)}</p>
-      <h2>${escapeHtml(project.title)}</h2>
+      <h2>${escapeHtml(project.cardTitle ?? project.title)}</h2>
       <p>${escapeHtml(project.summary)}</p>
     </a>`).join("");
 }
