@@ -156,13 +156,10 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .case-study{--case-space:clamp(24px,3vw,36px)}
 .case-heading,.case-cover{margin-bottom:var(--case-space)}
 .case-category{margin:0 0 10px;color:var(--acc);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.project-original{margin:-12px 0 16px;color:var(--mute)}
 .case-summary{max-width:62ch;margin:0 0 14px}
 .case-section{padding-block:var(--case-space);border-top:1px solid var(--line)}
 .case-section h2{font-size:clamp(20px,2.2vw,24px);line-height:1.15}
 .case-section:not(.cols) h2{margin:0 0 18px}
-.case-about p{max-width:62ch}
-.case-about p:last-child{margin-bottom:0}
 .case-study .next{margin-top:0;padding-bottom:0}
 .case-cover img,.project-media img{display:block;max-width:100%;height:auto;background:var(--card);border-radius:4px}
 .case-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:4px;background:var(--card)}
@@ -272,12 +269,13 @@ const PROJECTS = [
     thumbnail: "assets/projects/megreels-project-thumbnail.svg",
     category: "Personal project",
     "title": "Megreels",
-    "original": "იბჩუათ მარგალურო!",
     "summary": "A short-form video project about the Megrelian language.",
-    about: `
-      <p>In western Georgia, there's a region called Samegrelo, where people speak Megrelian, a unique language that UNESCO lists as endangered. Sadly, fewer and fewer people speak it, even in Samegrelo itself.</p>
-      <p>One of the fascinating things about Megrelian is that it has single-letter words with their own independent meanings. Yes, an entire word made up of just one letter.</p>
-      <p>Being Megrelian myself, I wanted to share this little-known side of the language. So, for my bachelor's project at GIPA, I created <strong>Megreels</strong> - a personal project dedicated to showing just how unique Megrelian is and bringing it to more people's attention.</p>`,
+    briefHeading: "About Project",
+    brief: [
+      "In western Georgia, there's a region called Samegrelo, where people speak Megrelian, a unique language that UNESCO lists as endangered. Sadly, fewer and fewer people speak it, even in Samegrelo itself.",
+      "One of the fascinating things about Megrelian is that it has single-letter words with their own independent meanings. Yes, an entire word made up of just one letter.",
+      "Being Megrelian myself, I wanted to share this little-known side of the language. So, for my bachelor's project at GIPA, I created **Megreels** - a personal project dedicated to showing just how unique Megrelian is and bringing it to more people's attention."
+    ],
     "cover": "assets/projects/megreels-cover.webp",
     videoFile: "assets/videos/megreels.mp4",
     videoPoster: "assets/projects/megreels-video-poster.jpg",
@@ -291,7 +289,6 @@ const PROJECTS = [
     "id": "gig",
     category: "Website copy",
     "title": "GIG — Potential in Action",
-    "original": "პოტენციალი მოქმედებაში",
     "role": "Georgian and English website copy",
     "summary": "Bilingual website copy for a Georgian multi-industry holding company.",
     brief: [
@@ -323,7 +320,6 @@ const PROJECTS = [
     "id": "sos-good-news",
     category: "Website copy",
     "title": "SOS Children’s Villages Georgia — Good News",
-    "original": "კარგი ამბები",
     "role": "Website copy · Holy Motors",
     "summary": "Website copy for a nonprofit supporting children and families in Georgia.",
     brief: [
@@ -355,7 +351,6 @@ const PROJECTS = [
     thumbnail: "assets/projects/aldagi-project-thumbnail.svg",
     category: "Brand campaign",
     "title": "Aldagi — Don’t Be Afraid, Get Insured",
-    "original": "ნუ გეშინია, დააზღვიე",
     "role": "Campaign development · Holy Motors team",
     "summary": "A car insurance campaign that turned everyday caution into comedy.",
     brief: [
@@ -399,7 +394,6 @@ const PROJECTS = [
     thumbnail: "assets/projects/evex-project-thumbnail.svg",
     category: "Brand campaign",
     "title": "Evex — Take Care of Yourself",
-    "original": "თავს მოუარე",
     "role": "Campaign team",
     "summary": "A short film and a site with 1,001 reasons to take care of yourself.",
     "brief": [
@@ -444,7 +438,6 @@ const PROJECTS = [
     thumbnail: "assets/projects/cellfie-project-thumbnail.svg",
     category: "Brand campaign",
     "title": "Cellfie — Make a Wish",
-    "original": "ისურვე და აგიხდება",
     "role": "Concept, script and copy · Holy Motors",
     "summary": "A singing genie helped launch Cellfie’s refreshed loyalty platform.",
     brief: [
@@ -475,7 +468,6 @@ const PROJECTS = [
     thumbnail: "assets/projects/elit-project-thumbnail.svg",
     category: "Brand campaign",
     "title": "Elit — Melting Season",
-    "original": "დნობის სეზონი",
     "role": "Campaign team",
     "summary": "A summer retail campaign that made the Georgian heat part of the joke.",
     "brief": [
@@ -529,6 +521,16 @@ const PROJECTS = [
     category: "Brand campaign",
     art: "Liberty Bank",
     summary: "Three campaign videos for Liberty Bank.",
+    brief: [
+      "Liberty Bank is one of the largest banks in Georgia and at Holy Motors, we worked on a summer campaign to promote its loan products.",
+      "The idea was simple: **with a little help from Liberty Bank, you can change your summer.**",
+      "We brought this message to life through a video campaign showing how Liberty Bank could help people make their summer plans a reality."
+    ],
+    work: [
+      "Contributed to the campaign's creative concept and messaging.",
+      "Worked on creative copy for the campaign.",
+      "Collaborated with the creative team on the campaign's development and execution."
+    ],
     youtubeVideos: ["O2M_55pQovA", "nZq4WhBPjFA", "IFz6scbHtHc"],
     videos: ["assets/videos/liberty-bank-1.mp4", "assets/videos/liberty-bank-2.mp4", "assets/videos/liberty-bank-3.mp4"],
     showProjectLinks: false,
@@ -675,16 +677,14 @@ function caseStudy(project, section) {
     <div class="case-heading">
       <p class="case-category">${escapeHtml(project.category)}</p>
       <h1>${escapeHtml(project.title)}</h1>
-      ${project.original ? `<p class="project-original" lang="${project.id === "megreels" ? "xmf" : "ka"}">${escapeHtml(project.original)}</p>` : ""}
-      ${project.about ? "" : `<p class="case-summary">${escapeHtml(project.summary)}</p>`}
+      <p class="case-summary">${escapeHtml(project.summary)}</p>
       ${project.role ? `<p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>` : ""}
     </div>
-    ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
     ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile), project.videoPoster)}</div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
-    ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
+    ${project.youtubeVideos ? projectVideoGallery(project) : ""}
     ${project.brief ? `<section class="case-section cols">
-      <h2>The goal</h2>
+      <h2>${escapeHtml(project.briefHeading ?? "The goal")}</h2>
       <div>${[project.brief].flat().map(paragraph => `<p>${formatCaseCopy(paragraph)}</p>`).join("")}</div>
     </section>` : ""}
     ${project.work ? `<section class="case-section cols">
@@ -693,7 +693,6 @@ function caseStudy(project, section) {
         ? `<ul>${project.work.map(item => `<li>${formatCaseCopy(item)}</li>`).join("")}</ul>`
         : `<p>${formatCaseCopy(project.work)}</p>`}
     </section>` : ""}
-    ${project.youtubeVideos ? projectVideoGallery(project) : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
       <h2>${leadVideo ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
       ${caseVideo(project.closingVideoEmbed, project.title + (leadVideo ? " video 2" : " project video"), project.portraitVideo)}
@@ -703,6 +702,7 @@ function caseStudy(project, section) {
       ${project.galleryStrip ? `<p class="gallery-note"><span class="gallery-swipe">Swipe to browse. </span>Select a photo to open it full size.</p>` : ""}
       <div class="project-media${project.galleryStrip ? " project-media--strip" : ""}">${gallery}</div>
     </section>` : ""}
+    ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
     ${project.showProjectLinks === false ? "" : `<div class="case-section next">
       ${project.link ? `<a class="btn" href="${escapeHtml(project.link[1])}">${escapeHtml(project.link[0])}</a>` : ""}
       <a class="more-work" href="#work">More projects</a>
