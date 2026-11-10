@@ -358,8 +358,16 @@ const PROJECTS = [
     "original": "ნუ გეშინია, დააზღვიე",
     "role": "Campaign development · Holy Motors team",
     "summary": "A car insurance campaign that turned everyday caution into comedy.",
-    "brief": "Develop a campaign for Aldagi’s car insurance.",
-    "work": "At Holy Motors, we built a comic world where people afraid of making mistakes wrap themselves and everything around them in bubble wrap.",
+    brief: [
+      "At Holy Motors, we worked on a car insurance campaign for Aldagi called **\"Don't Be Afraid, Get Insured.\"**",
+      "Inspired by those overly cautious people we all know, we created a funny little world filled with bubble wrap, where people are so afraid of making mistakes that they literally wrap themselves up to stay safe.",
+      "The idea was simple: instead of being afraid of everything that could go wrong, just get insured."
+    ],
+    work: [
+      "Participated in the creative process from concept development to final execution.",
+      "Worked with the creative team to develop the campaign's concept and messaging.",
+      "Contributed to bringing the campaign's humorous visual world to life."
+    ],
     "cover": "assets/projects/aldagi-car-insurance-cover.webp",
     "galleryStrip": true,
     "videoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Faldagi%2Fvideos%2F1111962429899670%2F&show_text=0&width=560",
@@ -643,7 +651,7 @@ function caseStudy(project, section) {
     ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
     ${project.brief ? `<section class="case-section cols">
       <h2>The goal</h2>
-      <div>${[project.brief].flat().map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
+      <div>${[project.brief].flat().map(paragraph => `<p>${escapeHtml(paragraph).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}</p>`).join("")}</div>
     </section>` : ""}
     ${project.work ? `<section class="case-section cols">
       <h2>What I worked on</h2>
