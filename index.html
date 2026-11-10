@@ -277,6 +277,7 @@ const PROJECTS = [
       <p>Being Megrelian myself, I wanted to share this little-known side of the language. So, for my bachelor's project at GIPA, I created <strong>Megreels</strong> - a personal project dedicated to showing just how unique Megrelian is and bringing it to more people's attention.</p>`,
     "cover": "assets/projects/megreels-cover.webp",
     videoFile: "assets/videos/megreels.mp4",
+    videoPoster: "assets/projects/megreels-video-poster.jpg",
     "closingVideoEmbed": "https://www-ccv.adobe.io/v1/player/ccv/3Ck3fRzKCqy/embed?api_key=behance1&bgcolor=%23191919",
     "portraitVideo": true,
     "link": ["Megreels on Instagram", "https://www.instagram.com/megreels_/"],
@@ -565,8 +566,8 @@ function work() {
   </section>`;
 }
 
-function caseVideo(src, title, portrait, native = false) {
-  if (native) return `<video class="case-video case-video--native" src="${escapeHtml(src)}" aria-label="${escapeHtml(title)}" controls playsinline preload="metadata"></video>`;
+function caseVideo(src, title, portrait, native = false, poster) {
+  if (native) return `<video class="case-video case-video--native" src="${escapeHtml(src)}" aria-label="${escapeHtml(title)}"${poster ? ` poster="${escapeHtml(poster)}"` : ""} controls playsinline preload="metadata"></video>`;
   const className = portrait ? "case-video case-video--portrait" : "case-video";
   return `<iframe class="${className}" src="${escapeHtml(src)}" title="${escapeHtml(title)}" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
 }
@@ -620,9 +621,9 @@ function caseStudy(project, section) {
       ${project.role ? `<p class="meta"><span>My role <b>${escapeHtml(project.role)}</b></span></p>` : ""}
     </div>
     ${results ? `<section class="case-section"><h2>Project results</h2><div class="stats">${results}</div></section>` : ""}
-    ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
-    ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile))}</div>`
+    ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile), project.videoPoster)}</div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
+    ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
     ${project.brief ? `<section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>` : ""}
     ${project.work ? `<section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>` : ""}
     ${project.youtubeVideos ? projectVideoGallery(project) : ""}
