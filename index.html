@@ -476,7 +476,12 @@ const PROJECTS = [
 
 const BRANDS = [
   ["mindset", "Mindset", "#case-mindset-with-mindia", "assets/brands/mindset.png", "A Georgian-language podcast about psychology and personal growth, hosted by Mindia.", "View Mindset case study"],
-  ["sasha-katsman", "Katsman", "#case-audio-course-campaigns", "assets/brands/sasha-katsman.jpg", "An entrepreneur, mentor, and speaker who offers courses and consultations on personal and professional development.", "View Katsman case study"],
+  ["sasha-katsman", "Katsman", "#case-audio-course-campaigns", "assets/brands/sasha-katsman.jpg", null, "View Katsman case study", {
+    story: [
+      "Katsman Podcast is one of Georgia's most influential podcasts about business. With podcasts becoming more and more popular in Georgia, I figured this would be an interesting industry to get into next.",
+      "I work with a small marketing team to grow the podcast, reach new audiences and promote and sell the educational products created by Sasha Katsman. So, it's a mix of content, marketing and sales - all in one place."
+    ]
+  }],
   ["holy-motors", "Holy Motors", "https://holymotors.com/", "assets/brands/holy-motors.jpg", null, "Visit Holy Motors", {
     story: [
       "Holy Motors is one of Georgia's standout creative agencies, founded by two of my university lecturers, with a holistic approach to building brands from scratch.",
@@ -670,10 +675,10 @@ function brandPage([, name, href, image, description, linkLabel, details]) {
             <h1 id="brand-story">The Story</h1>
             ${details.story.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </section>
-          <section aria-labelledby="brand-impact">
+          ${details.impact?.length ? `<section aria-labelledby="brand-impact">
             <h2 id="brand-impact">Key Contributions</h2>
             <ul>${details.impact.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-          </section>` : `<p>${escapeHtml(description)}</p>`}
+          </section>` : ""}` : `<p>${escapeHtml(description)}</p>`}
         <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
       </div>
     </div>
