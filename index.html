@@ -107,7 +107,6 @@ nav a:hover,nav a[aria-current]{text-decoration:underline;text-underline-offset:
 .brand-page-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:clamp(20px,4vw,48px);max-width:960px}
 .brand-page-image{border:1px solid var(--line);border-radius:4px}
 .brand-page-description p{margin:0 0 20px;max-width:55ch}
-.brand-page-description .brand-secondary-link{margin:12px 0 0;text-underline-offset:4px}
 .brand-page--story .brand-page-content{grid-template-columns:minmax(0,2fr) minmax(0,1fr);font-size:15px}
 .brand-page--story .brand-page-description{order:-1}
 .brand-page--story .brand-page-image{aspect-ratio:1;object-fit:cover;max-width:320px}
@@ -543,8 +542,7 @@ const PROJECTS = [
 ];
 
 const BRANDS = [
-  ["mindset", "Mindset", "#case-mindset-with-mindia", "assets/brands/mindset.png", null, "Visit Mindset", {
-    secondaryLink: {href: "https://www.facebook.com/profile.php?id=61586876393735", label: "Mindset on Facebook"},
+  ["mindset", "Mindset", "https://www.facebook.com/profile.php?id=61586876393735", "assets/brands/mindset.png", null, "Visit Mindset", {
     story: [
       "Mindia is a true rising star in Georgia's social media scene. The work he puts into raising awareness about psychology and mental health in Georgia is invaluable. Through his podcast, he's making psychology more accessible and starting conversations that Georgia definitely needs more of.",
       "And the numbers speak for themselves. Just a few months after launching, with only a handful of episodes released, the podcast had already reached millions of views and gained thousands of followers across social media. And it's still growing every day."
@@ -555,8 +553,7 @@ const BRANDS = [
       "Managing digital marketing, performance analytics and reporting across all channels."
     ]
   }],
-  ["sasha-katsman", "Katsman", "#case-audio-course-campaigns", "assets/brands/sasha-katsman.jpg", null, "Visit Katsman", {
-    secondaryLink: {href: "https://www.youtube.com/@Sasha-Katsman", label: "Sasha Katsman on YouTube"},
+  ["sasha-katsman", "Katsman", "https://www.youtube.com/@Sasha-Katsman", "assets/brands/sasha-katsman.jpg", null, "Visit Katsman", {
     story: [
       "Katsman Podcast is one of Georgia's most influential podcasts about business. With podcasts becoming more and more popular in Georgia, I figured this would be an interesting industry to get into next.",
       "I work with a small marketing team to grow the podcast, reach new audiences and promote and sell the educational products created by Sasha Katsman. So, it's a mix of content, marketing and sales - all in one place."
@@ -779,7 +776,6 @@ function brandPage([, name, href, image, description, linkLabel, details]) {
             <ul>${details.impact.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
           </section>` : ""}` : `<p>${escapeHtml(description)}</p>`}
         <a class="btn" href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>
-        ${details?.secondaryLink ? `<p class="brand-secondary-link"><a href="${escapeHtml(details.secondaryLink.href)}">${escapeHtml(details.secondaryLink.label)}</a></p>` : ""}
       </div>
     </div>
   </article>`;
