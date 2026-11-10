@@ -43,6 +43,9 @@ main{min-height:70vh;padding:56px 0 96px}
 .meta b{color:var(--ink);font-weight:500}
 .cols{display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px 40px}
 .cols p{margin:0;max-width:62ch}
+.case-section.cols p+p{margin-top:12px}
+.case-section.cols ul{margin:0;padding-left:20px;max-width:62ch}
+.case-section.cols li+li{margin-top:6px}
 .stats{display:flex;flex-wrap:wrap;gap:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 20px;min-width:150px}
 .stat b{display:block;font:700 34px var(--font);letter-spacing:-.03em}
@@ -291,8 +294,15 @@ const PROJECTS = [
     "original": "პოტენციალი მოქმედებაში",
     "role": "Georgian and English website copy",
     "summary": "Bilingual website copy for a Georgian multi-industry holding company.",
-    "brief": "GIG refreshed its strategy and visual identity with Holy Motors and needed copy for its new website.",
-    "work": "I wrote the new website copy in Georgian and English as part of the Holy Motors team.",
+    brief: [
+      "Georgian multi-industry holding company GIG teamed up with Holy Motors to refresh its brand strategy and visual identity.",
+      "As part of this transformation, my main job was to write the content for GIG's new website in both Georgian and English. The challenge was to tell the story of a company with years of history in a way that felt fresh, interesting and easy to follow."
+    ],
+    work: [
+      "Website copywriting in Georgian and English.",
+      "Brand storytelling, with a focus on GIG's history and development.",
+      "Adapting content to the brand's updated strategy and identity."
+    ],
     "cover": "assets/projects/gig-cover.webp",
     "closingVideoEmbed": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fgig.georgia%2Fvideos%2F1666663024178214%2F&show_text=0&width=560",
     "gallery": [
@@ -624,8 +634,16 @@ function caseStudy(project, section) {
     ${leadVideo ? `<div class="case-cover">${caseVideo(leadVideo, project.title + (project.closingVideoEmbed ? " video 1" : " campaign video"), project.portraitVideo, Boolean(project.videoFile), project.videoPoster)}</div>`
       : project.cover ? `<div class="case-cover"><img src="${escapeHtml(project.cover)}" width="720" height="563" alt="${escapeHtml(project.title)} project cover" decoding="async"></div>` : ""}
     ${project.about ? `<section class="case-section case-about"><h2>About Project</h2>${project.about}</section>` : ""}
-    ${project.brief ? `<section class="case-section cols"><h2>The goal</h2><p>${escapeHtml(project.brief)}</p></section>` : ""}
-    ${project.work ? `<section class="case-section cols"><h2>What I worked on</h2><p>${escapeHtml(project.work)}</p></section>` : ""}
+    ${project.brief ? `<section class="case-section cols">
+      <h2>The goal</h2>
+      <div>${[project.brief].flat().map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
+    </section>` : ""}
+    ${project.work ? `<section class="case-section cols">
+      <h2>What I worked on</h2>
+      ${Array.isArray(project.work)
+        ? `<ul>${project.work.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+        : `<p>${escapeHtml(project.work)}</p>`}
+    </section>` : ""}
     ${project.youtubeVideos ? projectVideoGallery(project) : ""}
     ${project.closingVideoEmbed ? `<section class="case-section">
       <h2>${leadVideo ? `More from ${escapeHtml(project.title)}` : "Project video"}</h2>
